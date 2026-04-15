@@ -1,0 +1,33 @@
+{
+  "name": "equiwings-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:migrate": "node scripts/migrate-data.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.103.2",
+    "jose": "^6.2.2",
+    "next": "16.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
+    "@types/cookie": "^0.6.0",
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20.19.39",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "cookie": "^1.1.1",
+    "crypto-js": "^4.2.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.3",
+    "lucide-react": "^1.8.0",
+    "typescript": "^5"
+  }
+}

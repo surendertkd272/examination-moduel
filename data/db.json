@@ -1,0 +1,1522 @@
+{
+  "users": [
+    {
+      "id": "u-superadmin",
+      "name": "Master Admin",
+      "username": "superadmin",
+      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+      "role": "superadmin",
+      "permissions": [
+        "manage_users",
+        "create_admin_accounts",
+        "create_jury_accounts",
+        "access_all_exams",
+        "perform_scoring",
+        "edit_templates",
+        "bulk_upload_students",
+        "schedule_exams",
+        "generate_certificates",
+        "export_reports"
+      ],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "status": "active"
+    },
+    {
+      "id": "u-admin",
+      "name": "Super Admin",
+      "username": "super admin",
+      "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "role": "admin",
+      "permissions": [
+        "bulk_upload_students",
+        "schedule_exams",
+        "generate_certificates",
+        "export_reports"
+      ],
+      "createdAt": "2026-01-15T00:00:00Z",
+      "status": "active"
+    },
+    {
+      "id": "u-jury2",
+      "name": "Jury 1",
+      "username": "jury1",
+      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+      "role": "jury",
+      "permissions": [
+        "view_assigned_schedule",
+        "input_real_time_scores",
+        "add_qualitative_remarks"
+      ],
+      "createdAt": "2026-02-10T00:00:00Z",
+      "status": "active"
+    },
+    {
+      "id": "u-1776168262915",
+      "name": "Jury 3",
+      "username": "jury3",
+      "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "role": "jury",
+      "permissions": [
+        "view_assigned_schedule",
+        "input_real_time_scores",
+        "add_qualitative_remarks",
+        "offline_data_sync"
+      ],
+      "createdAt": "2026-04-14T12:04:22.915Z",
+      "status": "active"
+    }
+  ],
+  "students": [
+    {
+      "profile": {
+        "name": "priyesh mishra",
+        "age": 14,
+        "dob": "2012-05-10",
+        "school": "Riverside Academy",
+        "class": "Grade 8",
+        "unique_id": "EQUI-1001"
+      },
+      "background_questionnaire": {
+        "events_attended": true,
+        "medals_won": 2,
+        "objective": "Nationals",
+        "coach_rating": 7
+      },
+      "progression": {
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": "2026-04-15"
+      }
+    },
+    {
+      "profile": {
+        "name": "Julian Brooks",
+        "age": 12,
+        "dob": "2014-08-22",
+        "school": "Oakwood High",
+        "class": "Grade 6",
+        "unique_id": "EQUI-1002"
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "Passion",
+        "coach_rating": 6
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": "2026-04-14"
+      }
+    },
+    {
+      "profile": {
+        "name": "Sophia Chen",
+        "age": 15,
+        "dob": "2011-03-18",
+        "school": "Westfield Prep",
+        "class": "Grade 9",
+        "unique_id": "EQUI-1003"
+      },
+      "background_questionnaire": {
+        "events_attended": true,
+        "medals_won": 5,
+        "objective": "International",
+        "coach_rating": 9
+      },
+      "progression": {
+        "levels": [
+          2,
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": "2026-04-15"
+      }
+    }
+  ],
+  "exams": [
+    {
+      "id": "exam-1",
+      "studentId": "EQUI-1001",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 3,
+      "date": "2026-04-15",
+      "time": "09:00 AM",
+      "status": "Completed",
+      "totalScore": 7,
+      "scores": {
+        "Dress Code_Helmet": 0,
+        "Dress Code_Riding Boots": 0,
+        "Parts of Saddle / Tack_Girth": 4,
+        "Know Your Horse_Withers": 3
+      },
+      "createdAt": "2026-04-10T00:00:00Z"
+    },
+    {
+      "id": "exam-2",
+      "studentId": "EQUI-1002",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 1,
+      "date": "2026-04-16",
+      "time": "10:00 AM",
+      "status": "In-Progress",
+      "totalScore": 8,
+      "scores": {
+        "Dress Code_Helmet": 5,
+        "Dress Code_T-Shirt/Blazer": 0,
+        "Dress Code_Riding Boots": 0,
+        "Overall Judgement_Control": 3
+      },
+      "createdAt": "2026-04-10T00:00:00Z"
+    },
+    {
+      "id": "exam-3",
+      "studentId": "EQUI-1003",
+      "juryId": "u-jury2",
+      "juryName": "Dr. Dianne Rachel",
+      "level": 4,
+      "date": "2026-04-14",
+      "time": "11:00 AM",
+      "status": "In-Progress",
+      "totalScore": 84,
+      "scores": {
+        "Dress Code_Helmet": 0,
+        "Dress Code_Breeches": 5,
+        "Dress Code_Riding Boots": 5,
+        "Dress Code_T-Shirt/Blazer": 5,
+        "Parts of Saddle / Tack_Saddle": 4,
+        "Parts of Saddle / Tack_Bridle": 4,
+        "Parts of Saddle / Tack_Reins": 5,
+        "Parts of Saddle / Tack_Girth": 4,
+        "Parts of Saddle / Tack_Stirrup": 4,
+        "Know Your Horse_Withers": 4,
+        "Know Your Horse_Forelock": 3,
+        "Know Your Horse_Hooves": 5,
+        "Know Your Horse_Mane": 4,
+        "Know Your Horse_Fetlock": 3,
+        "Riding Knowledge_Mounting": 5,
+        "Riding Knowledge_Seating Position": 4,
+        "Riding Knowledge_Trot": 3,
+        "Riding Knowledge_Canter": 3,
+        "Riding Knowledge_Jumps": 2,
+        "Overall Judgement_Confidence": 4,
+        "Overall Judgement_Attitude": 4,
+        "Overall Judgement_Control": 4
+      },
+      "createdAt": "2026-04-05T00:00:00Z"
+    },
+    {
+      "id": "exam-1776194388989",
+      "studentId": "EQUI-1003",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 2,
+      "date": "2026-04-15",
+      "time": "09:00 AM",
+      "status": "Completed",
+      "totalScore": 0,
+      "scores": {},
+      "createdAt": "2026-04-14T19:19:48.989Z"
+    },
+    {
+      "id": "exam-1776194389016",
+      "studentId": "EQUI-1003",
+      "juryId": "u-jury1",
+      "juryName": "Jury 2",
+      "level": 3,
+      "date": "2026-04-15",
+      "time": "09:00 AM",
+      "status": "Scheduled",
+      "totalScore": null,
+      "scores": null,
+      "createdAt": "2026-04-14T19:19:49.016Z"
+    },
+    {
+      "id": "exam-1776252454647",
+      "studentId": "EQUI-1001",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 1,
+      "date": "2026-08-01",
+      "time": "09:00 AM",
+      "status": "Completed",
+      "totalScore": 0,
+      "scores": {},
+      "createdAt": "2026-04-15T11:27:34.647Z"
+    },
+    {
+      "id": "exam-1776253750926",
+      "studentId": "EQUI-1001",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 1,
+      "date": "2026-05-01",
+      "time": "09:00 AM",
+      "status": "Completed",
+      "totalScore": 0,
+      "scores": {},
+      "createdAt": "2026-04-15T11:49:10.926Z"
+    },
+    {
+      "id": "exam-1776253750951",
+      "studentId": "EQUI-1001",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 2,
+      "date": "2026-05-01",
+      "time": "09:00 AM",
+      "status": "Completed",
+      "totalScore": 0,
+      "scores": {},
+      "createdAt": "2026-04-15T11:49:10.951Z"
+    },
+    {
+      "id": "exam-1776253750973",
+      "studentId": "EQUI-1001",
+      "juryId": "u-jury2",
+      "juryName": "Jury 1",
+      "level": 3,
+      "date": "2026-05-01",
+      "time": "09:00 AM",
+      "status": "Completed",
+      "totalScore": 7,
+      "scores": {
+        "Dress Code_Helmet": 0,
+        "Dress Code_Riding Boots": 0,
+        "Parts of Saddle / Tack_Girth": 4,
+        "Know Your Horse_Withers": 3
+      },
+      "createdAt": "2026-04-15T11:49:10.973Z"
+    }
+  ],
+  "scoringTemplates": {
+    "1": {
+      "levelName": "Level 1 — Beginner",
+      "passThreshold": 70,
+      "categories": [
+        {
+          "name": "Dress Code",
+          "items": [
+            {
+              "name": "Helmet",
+              "max_score": 2
+            },
+            {
+              "name": "Breeches",
+              "max_score": 2
+            },
+            {
+              "name": "Riding Boots/Chaps",
+              "max_score": 2
+            },
+            {
+              "name": "T-Shirt/Blazer",
+              "max_score": 2
+            }
+          ],
+          "max_score": 2
+        },
+        {
+          "name": "Know Your Horse",
+          "items": [
+            {
+              "name": "Name of Horse",
+              "max_score": 2
+            },
+            {
+              "name": "Colour of Pony",
+              "max_score": 2
+            },
+            {
+              "name": "Eyes",
+              "max_score": 2
+            },
+            {
+              "name": "Mouth",
+              "max_score": 2
+            },
+            {
+              "name": "Legs",
+              "max_score": 2
+            },
+            {
+              "name": "Hooves",
+              "max_score": 2
+            },
+            {
+              "name": "Ears",
+              "max_score": 2
+            },
+            {
+              "name": "Tail",
+              "max_score": 2
+            },
+            {
+              "name": "Mane",
+              "max_score": 2
+            },
+            {
+              "name": "Neck",
+              "max_score": 2
+            }
+          ],
+          "max_score": 2
+        },
+        {
+          "name": "Parts of Saddle",
+          "items": [
+            {
+              "name": "Saddle",
+              "max_score": 2
+            },
+            {
+              "name": "Bridle",
+              "max_score": 2
+            },
+            {
+              "name": "Reins",
+              "max_score": 2
+            },
+            {
+              "name": "Saddle Pad",
+              "max_score": 2
+            }
+          ],
+          "max_score": 2
+        },
+        {
+          "name": "Riding Knowledge",
+          "items": [
+            {
+              "name": "Approaching your Horse",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Mounting (Ground/Stand)",
+              "max_score": 5
+            },
+            {
+              "name": "Correct Seating Position",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Holding of Reins",
+              "max_score": 5
+            },
+            {
+              "name": "Correct Stirrup Position & Feet Position",
+              "max_score": 5
+            },
+            {
+              "name": "Feet Aid for Walk",
+              "max_score": 2
+            },
+            {
+              "name": "Loose Reins for Walk Start",
+              "max_score": 2
+            },
+            {
+              "name": "Right Turn - Reins Use",
+              "max_score": 2
+            },
+            {
+              "name": "Left Turn - Reins Use",
+              "max_score": 2
+            },
+            {
+              "name": "Trot on Command",
+              "max_score": 5
+            },
+            {
+              "name": "Halt on Command",
+              "max_score": 5
+            },
+            {
+              "name": "Patting of Horse after Halt",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Dismount",
+              "max_score": 5
+            },
+            {
+              "name": "Patting a Horse while Leaving",
+              "max_score": 2
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Overall Judgement",
+          "items": [
+            {
+              "name": "Overall Confidence",
+              "max_score": 2
+            },
+            {
+              "name": "Attitude",
+              "max_score": 2
+            },
+            {
+              "name": "Control on Horse",
+              "max_score": 2
+            },
+            {
+              "name": "Handler used/Not Used",
+              "max_score": 5
+            },
+            {
+              "name": "Knowledge of Gymkhana Events",
+              "max_score": 4
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Miscellaneous Questions",
+          "items": [
+            {
+              "name": "Names",
+              "max_score": 0,
+              "type": "text"
+            },
+            {
+              "name": "Numbers",
+              "max_score": 0,
+              "type": "number"
+            },
+            {
+              "name": "Equestrian Events Attended",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Medals Won",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Points to Coach by Student",
+              "max_score": 10
+            },
+            {
+              "name": "Points to Horse by Student",
+              "max_score": 10
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Objective of Pursuing Equestrian Sport",
+          "type": "select",
+          "options": [
+            "Passion",
+            "To Play Nationals",
+            "To Play International",
+            "Just Fun",
+            "Lifestyle Sport"
+          ],
+          "items": [
+            {
+              "name": "Objective",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Remarks by Jury",
+          "type": "text",
+          "items": [
+            {
+              "name": "Jury Remarks",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        }
+      ]
+    },
+    "2": {
+      "levelName": "Level 2 — Elementary",
+      "passThreshold": 70,
+      "categories": [
+        {
+          "name": "Dress Code",
+          "items": [
+            {
+              "name": "Helmet",
+              "max_score": 1
+            },
+            {
+              "name": "Breeches",
+              "max_score": 1
+            },
+            {
+              "name": "Riding Boots/Chaps",
+              "max_score": 1
+            },
+            {
+              "name": "T-Shirt/Blazer",
+              "max_score": 1
+            }
+          ],
+          "max_score": 1
+        },
+        {
+          "name": "Know Your Horse",
+          "items": [
+            {
+              "name": "Name of Horse",
+              "max_score": 1
+            },
+            {
+              "name": "Colour of Pony",
+              "max_score": 1
+            },
+            {
+              "name": "Eyes",
+              "max_score": 1
+            },
+            {
+              "name": "Mouth",
+              "max_score": 1
+            },
+            {
+              "name": "Legs",
+              "max_score": 1
+            },
+            {
+              "name": "Hooves",
+              "max_score": 1
+            },
+            {
+              "name": "Ears",
+              "max_score": 1
+            },
+            {
+              "name": "Tail",
+              "max_score": 1
+            },
+            {
+              "name": "Mane",
+              "max_score": 1
+            },
+            {
+              "name": "Neck",
+              "max_score": 1
+            },
+            {
+              "name": "Withers",
+              "max_score": 2
+            },
+            {
+              "name": "Forelock",
+              "max_score": 2
+            },
+            {
+              "name": "Knee",
+              "max_score": 2
+            }
+          ],
+          "max_score": 2
+        },
+        {
+          "name": "Parts of Tack",
+          "items": [
+            {
+              "name": "Saddle",
+              "max_score": 0.5
+            },
+            {
+              "name": "Bridle",
+              "max_score": 0.5
+            },
+            {
+              "name": "Reins",
+              "max_score": 0.5
+            },
+            {
+              "name": "Saddle Pad",
+              "max_score": 0.5
+            },
+            {
+              "name": "Girth",
+              "max_score": 0.5
+            },
+            {
+              "name": "Stirrup",
+              "max_score": 0.5
+            },
+            {
+              "name": "Bit",
+              "max_score": 0.5
+            }
+          ],
+          "max_score": 0.5
+        },
+        {
+          "name": "Riding Knowledge",
+          "items": [
+            {
+              "name": "Approaching your Horse",
+              "max_score": 3
+            },
+            {
+              "name": "Checking Tack Before Mounting",
+              "max_score": 5
+            },
+            {
+              "name": "Correct Mounting (Ground/Stand)",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Seating Position",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Holding of Reins",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Stirrup Position & Feet Position",
+              "max_score": 2
+            },
+            {
+              "name": "Feet Aid for Walk",
+              "max_score": 2
+            },
+            {
+              "name": "Loose Reins for Walk Start",
+              "max_score": 2
+            },
+            {
+              "name": "Right Turn - Reins Use",
+              "max_score": 2
+            },
+            {
+              "name": "Left Turn - Reins Use",
+              "max_score": 2
+            },
+            {
+              "name": "Trot on Command",
+              "max_score": 2
+            },
+            {
+              "name": "Halt on Command",
+              "max_score": 2
+            },
+            {
+              "name": "Left Incline (Bumping Trot)",
+              "max_score": 5
+            },
+            {
+              "name": "Right Incline (Bumping Trot)",
+              "max_score": 5
+            },
+            {
+              "name": "Long Figure of Eight (Bumping Trot)",
+              "max_score": 5
+            },
+            {
+              "name": "Canter (Left Circle & Right Circle)",
+              "max_score": 10
+            },
+            {
+              "name": "Patting of Horse after Halt",
+              "max_score": 2
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Overall Judgement",
+          "items": [
+            {
+              "name": "Overall Confidence",
+              "max_score": 3
+            },
+            {
+              "name": "Attitude",
+              "max_score": 3
+            },
+            {
+              "name": "Control on Horse",
+              "max_score": 5
+            },
+            {
+              "name": "Knowledge of Equestrian Sports (5)",
+              "max_score": 4
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Miscellaneous Questions",
+          "items": [
+            {
+              "name": "Names",
+              "max_score": 0,
+              "type": "text"
+            },
+            {
+              "name": "Numbers",
+              "max_score": 0,
+              "type": "number"
+            },
+            {
+              "name": "Equestrian Events Attended",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Medals Won",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Points to Coach by Student",
+              "max_score": 10
+            },
+            {
+              "name": "Points to Horse by Student",
+              "max_score": 10
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Objective of Pursuing Equestrian Sport",
+          "type": "select",
+          "options": [
+            "Passion",
+            "To Play Nationals",
+            "To Play International",
+            "Just Fun",
+            "Lifestyle Sport"
+          ],
+          "items": [
+            {
+              "name": "Objective",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Remarks by Jury",
+          "type": "text",
+          "items": [
+            {
+              "name": "Jury Remarks",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        }
+      ]
+    },
+    "3": {
+      "levelName": "Level 3 — Intermediate",
+      "passThreshold": 70,
+      "categories": [
+        {
+          "name": "Dress Code",
+          "items": [
+            {
+              "name": "Helmet",
+              "max_score": 1
+            },
+            {
+              "name": "Breeches",
+              "max_score": 1
+            },
+            {
+              "name": "Riding Boots/Chaps",
+              "max_score": 1
+            },
+            {
+              "name": "T-Shirt/Blazer",
+              "max_score": 1
+            }
+          ],
+          "max_score": 1
+        },
+        {
+          "name": "Know Your Horse",
+          "items": [
+            {
+              "name": "Name of Horse",
+              "max_score": 0.5
+            },
+            {
+              "name": "Colour of Horse",
+              "max_score": 0.5
+            },
+            {
+              "name": "Eyes",
+              "max_score": 0.5
+            },
+            {
+              "name": "Mouth",
+              "max_score": 0.5
+            },
+            {
+              "name": "Legs",
+              "max_score": 0.5
+            },
+            {
+              "name": "Hooves",
+              "max_score": 0.5
+            },
+            {
+              "name": "Ears",
+              "max_score": 0.5
+            },
+            {
+              "name": "Tail",
+              "max_score": 0.5
+            },
+            {
+              "name": "Mane",
+              "max_score": 0.5
+            },
+            {
+              "name": "Neck",
+              "max_score": 0.5
+            },
+            {
+              "name": "Withers",
+              "max_score": 1
+            },
+            {
+              "name": "Forelock",
+              "max_score": 1
+            },
+            {
+              "name": "Knee",
+              "max_score": 1
+            },
+            {
+              "name": "Fetlock",
+              "max_score": 1
+            },
+            {
+              "name": "Back",
+              "max_score": 0.5
+            }
+          ],
+          "max_score": 1
+        },
+        {
+          "name": "Parts of Tack",
+          "items": [
+            {
+              "name": "Saddle",
+              "max_score": 0.5
+            },
+            {
+              "name": "Bridle",
+              "max_score": 0.5
+            },
+            {
+              "name": "Reins",
+              "max_score": 0.5
+            },
+            {
+              "name": "Saddle Pad",
+              "max_score": 0.5
+            },
+            {
+              "name": "Girth",
+              "max_score": 0.5
+            },
+            {
+              "name": "Stirrup",
+              "max_score": 0.5
+            },
+            {
+              "name": "Bit",
+              "max_score": 0.5
+            },
+            {
+              "name": "Noseband",
+              "max_score": 2
+            },
+            {
+              "name": "Cheepiece",
+              "max_score": 2
+            },
+            {
+              "name": "Headpiece",
+              "max_score": 2
+            },
+            {
+              "name": "Pommel",
+              "max_score": 2
+            }
+          ],
+          "max_score": 2
+        },
+        {
+          "name": "Riding Knowledge",
+          "items": [
+            {
+              "name": "Approaching your Horse",
+              "max_score": 2
+            },
+            {
+              "name": "Checking Tack Before Mounting",
+              "max_score": 5
+            },
+            {
+              "name": "Correct Mounting (Ground/Stand)",
+              "max_score": 1
+            },
+            {
+              "name": "Correct Seating Position",
+              "max_score": 2
+            },
+            {
+              "name": "Correct Holding of Reins",
+              "max_score": 1
+            },
+            {
+              "name": "Correct Stirrup Position & Feet Position",
+              "max_score": 2
+            },
+            {
+              "name": "Feet Aid for Walk",
+              "max_score": 1
+            },
+            {
+              "name": "Loose Reins for Walk Start",
+              "max_score": 1
+            },
+            {
+              "name": "Right Turn - Reins Use",
+              "max_score": 1
+            },
+            {
+              "name": "Left Turn - Reins Use",
+              "max_score": 1
+            },
+            {
+              "name": "Trot on Command",
+              "max_score": 1
+            },
+            {
+              "name": "Halt on Command",
+              "max_score": 1
+            },
+            {
+              "name": "Left Incline (Bumping Trot)",
+              "max_score": 2
+            },
+            {
+              "name": "Right Incline (Bumping Trot)",
+              "max_score": 2
+            },
+            {
+              "name": "Long Figure of Eight (Bumping Trot)",
+              "max_score": 2
+            },
+            {
+              "name": "Canter (Left Circle & Right Circle)",
+              "max_score": 5
+            },
+            {
+              "name": "Patting of Horse after Halt",
+              "max_score": 1
+            },
+            {
+              "name": "Pole Work (Walk, Trot)",
+              "max_score": 4
+            },
+            {
+              "name": "Small Jumps - Position",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Aid",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Reins",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Take Off",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Landing",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Feet Position",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Grip",
+              "max_score": 5
+            },
+            {
+              "name": "Small Jumps - Control",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Patting of Horse after Jump",
+              "max_score": 1
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Overall Judgement",
+          "items": [
+            {
+              "name": "Overall Confidence",
+              "max_score": 5
+            },
+            {
+              "name": "Attitude",
+              "max_score": 5
+            },
+            {
+              "name": "Control on Horse",
+              "max_score": 5
+            },
+            {
+              "name": "Knowledge of Equestrian Sports (5)",
+              "max_score": 5
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Miscellaneous Questions",
+          "items": [
+            {
+              "name": "Names",
+              "max_score": 0,
+              "type": "text"
+            },
+            {
+              "name": "Numbers",
+              "max_score": 0,
+              "type": "number"
+            },
+            {
+              "name": "Equestrian Events Attended",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Medals Won",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Points to Coach by Student",
+              "max_score": 10
+            },
+            {
+              "name": "Points to Horse by Student",
+              "max_score": 10
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Objective of Pursuing Equestrian Sport",
+          "type": "select",
+          "options": [
+            "Passion",
+            "To Play Nationals",
+            "To Play International",
+            "Just Fun",
+            "Lifestyle Sport"
+          ],
+          "items": [
+            {
+              "name": "Objective",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Remarks by Jury",
+          "type": "text",
+          "items": [
+            {
+              "name": "Jury Remarks",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        }
+      ]
+    },
+    "4": {
+      "levelName": "Level 4 — Advanced",
+      "passThreshold": 70,
+      "categories": [
+        {
+          "name": "Dress Code",
+          "items": [
+            {
+              "name": "Helmet",
+              "max_score": 1
+            },
+            {
+              "name": "Breeches",
+              "max_score": 1
+            },
+            {
+              "name": "Riding Boots/Chaps",
+              "max_score": 1
+            },
+            {
+              "name": "T-Shirt/Blazer",
+              "max_score": 1
+            }
+          ],
+          "max_score": 1
+        },
+        {
+          "name": "Know Your Horse",
+          "items": [
+            {
+              "name": "Name of Horse",
+              "max_score": 0.5
+            },
+            {
+              "name": "Withers",
+              "max_score": 0.5
+            },
+            {
+              "name": "Forelock",
+              "max_score": 0.5
+            },
+            {
+              "name": "Fetlock",
+              "max_score": 0.5
+            },
+            {
+              "name": "Loin",
+              "max_score": 0.5
+            },
+            {
+              "name": "Pastern",
+              "max_score": 0.5
+            }
+          ],
+          "max_score": 0.5
+        },
+        {
+          "name": "Parts of Saddle",
+          "items": [
+            {
+              "name": "Saddle",
+              "max_score": 0.5
+            },
+            {
+              "name": "Bridle",
+              "max_score": 0.5
+            },
+            {
+              "name": "Reins",
+              "max_score": 0.5
+            },
+            {
+              "name": "Saddle Pad",
+              "max_score": 0.5
+            },
+            {
+              "name": "Girth",
+              "max_score": 0.5
+            },
+            {
+              "name": "Stirrup",
+              "max_score": 0.5
+            },
+            {
+              "name": "Bit",
+              "max_score": 0.5
+            },
+            {
+              "name": "Noseband",
+              "max_score": 0.5
+            },
+            {
+              "name": "Cheepiece",
+              "max_score": 0.5
+            },
+            {
+              "name": "Headpiece",
+              "max_score": 0.5
+            },
+            {
+              "name": "Pommel",
+              "max_score": 0.5
+            },
+            {
+              "name": "Martiangle",
+              "max_score": 0.5
+            }
+          ],
+          "max_score": 0.5
+        },
+        {
+          "name": "Riding Knowledge",
+          "items": [
+            {
+              "name": "Approaching your Horse",
+              "max_score": 1
+            },
+            {
+              "name": "Checking Tack Before Mounting",
+              "max_score": 1
+            },
+            {
+              "name": "Correct Mounting (Ground/Stand)",
+              "max_score": 1
+            },
+            {
+              "name": "Correct Seating Position",
+              "max_score": 1
+            },
+            {
+              "name": "Correct Holding of Reins",
+              "max_score": 1
+            },
+            {
+              "name": "Correct Stirrup Position & Feet Position",
+              "max_score": 1
+            },
+            {
+              "name": "Feet Aid for Walk",
+              "max_score": 1
+            },
+            {
+              "name": "Loose Reins for Walk Start",
+              "max_score": 1
+            },
+            {
+              "name": "Right Turn - Reins Use",
+              "max_score": 1
+            },
+            {
+              "name": "Left Turn - Reins Use",
+              "max_score": 1
+            },
+            {
+              "name": "Trot on Command",
+              "max_score": 1
+            },
+            {
+              "name": "Halt on Command",
+              "max_score": 1
+            },
+            {
+              "name": "Left Incline (Bumping Trot)",
+              "max_score": 1
+            },
+            {
+              "name": "Right Incline (Bumping Trot)",
+              "max_score": 1
+            },
+            {
+              "name": "Long Figure of Eight (Bumping Trot)",
+              "max_score": 1
+            },
+            {
+              "name": "Canter (Left Circle & Right Circle)",
+              "max_score": 5
+            },
+            {
+              "name": "Patting of Horse after Halt",
+              "max_score": 1
+            },
+            {
+              "name": "Individual Riding",
+              "max_score": 5
+            },
+            {
+              "name": "Riding Without Stirrups (Cross Steps)",
+              "max_score": 5
+            },
+            {
+              "name": "Small Jumps - Position",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Aid",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Reins",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Take Off",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Landing",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Feet Position",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Grip",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Control",
+              "max_score": 2
+            },
+            {
+              "name": "Small Jumps - Patting of Horse after Jump",
+              "max_score": 1
+            },
+            {
+              "name": "Gallop Run - Confidence",
+              "max_score": 2
+            },
+            {
+              "name": "Gallop Run - Control",
+              "max_score": 2
+            },
+            {
+              "name": "Gallop Run - Grip",
+              "max_score": 1
+            },
+            {
+              "name": "Gallop Run - Safety",
+              "max_score": 1
+            },
+            {
+              "name": "Gallop Run - Halt",
+              "max_score": 1
+            },
+            {
+              "name": "Tent Pegging 1 Run",
+              "max_score": 6
+            },
+            {
+              "name": "Rings & Peg 1 Run",
+              "max_score": 6
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Overall Judgement",
+          "items": [
+            {
+              "name": "Overall Confidence",
+              "max_score": 5
+            },
+            {
+              "name": "Attitude",
+              "max_score": 5
+            },
+            {
+              "name": "Control on Horse",
+              "max_score": 5
+            },
+            {
+              "name": "Knowledge of Equestrian Sports (5)",
+              "max_score": 5
+            }
+          ],
+          "max_score": 5
+        },
+        {
+          "name": "Miscellaneous Questions",
+          "items": [
+            {
+              "name": "Names",
+              "max_score": 0,
+              "type": "text"
+            },
+            {
+              "name": "Numbers",
+              "max_score": 0,
+              "type": "number"
+            },
+            {
+              "name": "Equestrian Events Attended",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Medals Won",
+              "max_score": 0,
+              "type": "select",
+              "options": ["Yes", "No"]
+            },
+            {
+              "name": "Points to Coach by Student",
+              "max_score": 10
+            },
+            {
+              "name": "Points to Horse by Student",
+              "max_score": 10
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Objective of Pursuing Equestrian Sport",
+          "type": "select",
+          "options": [
+            "Passion",
+            "To Play Nationals",
+            "To Play International",
+            "Just Fun",
+            "Lifestyle Sport"
+          ],
+          "items": [
+            {
+              "name": "Objective",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        },
+        {
+          "name": "Remarks by Jury",
+          "type": "text",
+          "items": [
+            {
+              "name": "Jury Remarks",
+              "max_score": 0
+            }
+          ],
+          "max_score": 0
+        }
+      ]
+    }
+  }
+}

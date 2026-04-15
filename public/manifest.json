@@ -1,0 +1,17 @@
+{
+  "name": "Equiwings Exam Management",
+  "short_name": "Equiwings",
+  "description": "Multi-Tenant RBAC Dashboard for Equestrian Exams",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1A237E",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
