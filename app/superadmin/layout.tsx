@@ -19,6 +19,7 @@ export default function SuperAdminLayout({
     { href: '/superadmin/students', icon: <GraduationCap size={24} />, title: 'Students' },
     { href: '/superadmin/users', icon: <Users size={24} />, title: 'Manage Users' },
     { href: '/superadmin/templates', icon: <FileText size={24} />, title: 'Scoring Templates' },
+    { href: '/superadmin/settings', icon: <Settings size={24} />, title: 'Settings' },
   ];
 
   // Dashboard manages its own 3-pane layout internally
@@ -38,9 +39,6 @@ export default function SuperAdminLayout({
               {item.icon}
             </Link>
           ))}
-          <button className="icon-btn" title="Settings">
-            <Settings size={24} />
-          </button>
         </nav>
 
         <div style={{ marginTop: 'auto' }}>

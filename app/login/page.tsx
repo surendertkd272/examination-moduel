@@ -1,8 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Shield, ChevronRight, Eye, EyeOff } from 'lucide-react';
+
+interface TestAccount {
+  username: string;
+  name: string;
+  role: 'superadmin' | 'admin' | 'jury';
+}
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -11,6 +17,28 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [testAccounts, setTestAccounts] = useState<TestAccount[]>([]);
+  const [defaultPassword, setDefaultPassword] = useState('admin');
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await fetch('/api/auth/test-accounts', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (cancelled) return;
+        setTestAccounts(data.accounts || []);
+        setDefaultPassword(data.defaultPassword || 'admin');
+      } catch {
+        // silent — login page still usable via manual entry
+      }
+    };
+    load();
+    // Poll every 15s so newly-created jury users appear without a manual refresh.
+    const interval = setInterval(load, 15000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +59,14 @@ export default function LoginPage() {
 
   const fillCredentials = (user: string) => {
     setUsername(user);
-    setPassword('admin');
+    setPassword(defaultPassword);
     setError('');
+  };
+
+  const roleColors: Record<string, { bg: string; fg: string }> = {
+    superadmin: { bg: '#ede9fe', fg: '#6d28d9' },
+    admin: { bg: '#dbeafe', fg: '#1d4ed8' },
+    jury: { bg: '#fef3c7', fg: '#92400e' },
   };
 
   return (
@@ -104,28 +138,35 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #e5e7eb' }}>
-          <p className="text-xs text-muted mb-4 uppercase font-bold tracking-wider">Test Accounts (password: admin)</p>
-          <div className="flex flex-col gap-2">
-            <button
-              type="button"
-              onClick={() => fillCredentials('superadmin')}
-              style={{ background: '#f3f4f6', color: '#3b82f6', minHeight: '40px', fontSize: '0.875rem', borderRadius: '8px' }}
-            >
-              superadmin
-            </button>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => fillCredentials('jury1')}
-                className="flex-1"
-                style={{ background: '#f3f4f6', color: '#3b82f6', minHeight: '40px', fontSize: '0.875rem', borderRadius: '8px' }}
-              >
-                jury1
-              </button>
+        {testAccounts.length > 0 && (
+          <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #e5e7eb' }}>
+            <p className="text-xs text-muted mb-4 uppercase font-bold tracking-wider">
+              Test Accounts (password: {defaultPassword})
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '220px', overflowY: 'auto' }}>
+              {testAccounts.map(acc => {
+                const c = roleColors[acc.role] || { bg: '#f3f4f6', fg: '#3b82f6' };
+                return (
+                  <button
+                    key={acc.username}
+                    type="button"
+                    onClick={() => fillCredentials(acc.username)}
+                    style={{
+                      background: c.bg, color: c.fg, minHeight: '40px', fontSize: '0.875rem',
+                      borderRadius: '8px', display: 'flex', justifyContent: 'space-between',
+                      alignItems: 'center', padding: '0 14px', border: 'none',
+                    }}
+                  >
+                    <span style={{ fontWeight: 600 }}>{acc.username}</span>
+                    <span style={{ fontSize: '10px', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px', opacity: 0.85 }}>
+                      {acc.role}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
-        </div>
+        )}
       </div>
       <p style={{ position: 'fixed', bottom: '24px', fontSize: '12px', color: '#9ca3af' }}>© 2026 Equiwings Global Aviation & Logistics</p>
     </div>

@@ -263,6 +263,27 @@ export async function deleteExam(id: string): Promise<void> {
   if (error) throw error;
 }
 
+// Propagate a jury rename to the denormalized jury_name column on every
+// exam they're assigned to. Called from the user PUT handler.
+export async function updateExamsJuryName(juryId: string, newName: string): Promise<number> {
+  const { data, error } = await supabase
+    .from('exams')
+    .update({ jury_name: newName })
+    .eq('jury_id', juryId)
+    .select('id');
+  if (error) throw error;
+  return (data || []).length;
+}
+
+export async function countExamsByJury(juryId: string): Promise<number> {
+  const { count, error } = await supabase
+    .from('exams')
+    .select('id', { count: 'exact', head: true })
+    .eq('jury_id', juryId);
+  if (error) throw error;
+  return count || 0;
+}
+
 // ── Scoring Templates ─────────────────────────────────────────────────────────
 
 export async function getScoringTemplates(): Promise<Record<string, ScoringTemplate>> {
@@ -287,6 +308,69 @@ export async function setScoringTemplates(templates: Record<string, ScoringTempl
 
   if (rows.length > 0) {
     const { error } = await supabase.from('scoring_templates').insert(rows);
+    if (error) throw error;
+  }
+}
+
+// ── App Settings (key/value) ──────────────────────────────────────────────────
+
+export interface AppSettingRow {
+  key: string;
+  value: unknown;
+  category: string;
+  isPublic: boolean;
+  updatedAt?: string;
+  updatedBy?: string;
+}
+
+export async function getAllSettings(): Promise<AppSettingRow[]> {
+  const { data, error } = await supabase.from('app_settings').select('*');
+  if (error) throw error;
+  return (data || []).map(r => ({
+    key: r.key,
+    value: r.value,
+    category: r.category,
+    isPublic: r.is_public,
+    updatedAt: r.updated_at,
+    updatedBy: r.updated_by,
+  }));
+}
+
+export async function getPublicSettings(): Promise<Record<string, unknown>> {
+  const { data, error } = await supabase.from('app_settings').select('key, value').eq('is_public', true);
+  if (error) throw error;
+  const out: Record<string, unknown> = {};
+  for (const row of data || []) out[row.key] = row.value;
+  return out;
+}
+
+export async function upsertSettings(
+  entries: { key: string; value: unknown }[],
+  updatedBy: string
+): Promise<void> {
+  if (entries.length === 0) return;
+  // Only allow updates to keys that already exist, to keep the schema explicit.
+  const { data: existing, error: selErr } = await supabase
+    .from('app_settings')
+    .select('key')
+    .in('key', entries.map(e => e.key));
+  if (selErr) throw selErr;
+  const allowed = new Set((existing || []).map(r => r.key));
+
+  const updates = entries
+    .filter(e => allowed.has(e.key))
+    .map(e => ({
+      key: e.key,
+      value: e.value,
+      updated_at: new Date().toISOString(),
+      updated_by: updatedBy,
+    }));
+
+  for (const u of updates) {
+    const { error } = await supabase
+      .from('app_settings')
+      .update({ value: u.value, updated_at: u.updated_at, updated_by: u.updated_by })
+      .eq('key', u.key);
     if (error) throw error;
   }
 }

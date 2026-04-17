@@ -101,7 +101,7 @@ interface DataContextType {
   updateExamScores: (examId: string, scores: Record<string, any>) => Promise<{ success: boolean; totalScore?: number }>;
   addUser: (user: { name: string; username: string; role: string; password: string }) => Promise<{ success: boolean; error?: string }>;
   updateUser: (id: string, updates: { name?: string; username?: string; role?: string; password?: string; status?: string }) => Promise<{ success: boolean; error?: string }>;
-  deleteUser: (id: string) => Promise<boolean>;
+  deleteUser: (id: string) => Promise<{ success: boolean; error?: string }>;
   updateScoringTemplates: (templates: Record<string, ScoringTemplate>) => Promise<boolean>;
   exportStudentsCSV: () => Promise<void>;
   exportScoresCSV: () => Promise<void>;
@@ -173,6 +173,29 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     };
     loadAll();
+
+    // Background sync: users + exams change frequently (jury added, exam
+    // scheduled/completed in another tab). Poll every 20s so the jury list
+    // and exam cards reflect reality without requiring a manual refresh.
+    const interval = setInterval(() => {
+      refreshUsers();
+      refreshExams();
+    }, 20000);
+
+    // Also resync immediately when the tab becomes visible again — covers
+    // the "left tab open for an hour" case without waiting for the next tick.
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') {
+        refreshUsers();
+        refreshExams();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [isAuthenticated, authLoading, refreshStudents, refreshExams, refreshUsers, refreshScoringTemplates]);
 
   const addStudent = async (student: Student): Promise<boolean> => {
@@ -334,7 +357,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       if (res.ok) {
-        await refreshUsers();
+        // Name changes propagate into exams.jury_name server-side; refetch both.
+        await Promise.all([refreshUsers(), refreshExams()]);
         return { success: true };
       }
       return { success: false, error: data.error };
@@ -343,15 +367,18 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const deleteUser = async (id: string): Promise<boolean> => {
+  const deleteUser = async (id: string): Promise<{ success: boolean; error?: string }> => {
     try {
       const res = await fetch(`/api/users/${id}`, { method: 'DELETE' });
       if (res.ok) {
         await refreshUsers();
-        return true;
+        return { success: true };
       }
-    } catch { /* ignore */ }
-    return false;
+      const data = await res.json().catch(() => ({}));
+      return { success: false, error: data.error || 'Delete failed' };
+    } catch {
+      return { success: false, error: 'Network error' };
+    }
   };
 
   const updateScoringTemplates = async (templates: Record<string, ScoringTemplate>): Promise<boolean> => {

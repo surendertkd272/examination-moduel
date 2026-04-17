@@ -17,6 +17,8 @@ export const viewport = {
 
 import { AuthProvider } from "@/context/AuthContext";
 import { DataProvider } from "@/context/DataContext";
+import { SettingsProvider } from "@/context/SettingsContext";
+import MaintenanceGate from "@/components/MaintenanceGate";
 
 export default function RootLayout({
   children,
@@ -27,9 +29,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <DataProvider>
-            {children}
-          </DataProvider>
+          <SettingsProvider>
+            <DataProvider>
+              <MaintenanceGate>{children}</MaintenanceGate>
+            </DataProvider>
+          </SettingsProvider>
         </AuthProvider>
       </body>
     </html>

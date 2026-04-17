@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserById, updateUser, deleteUser } from '@/lib/db';
+import { getUserById, updateUser, deleteUser, updateExamsJuryName, countExamsByJury } from '@/lib/db';
 import { verifyToken, hashPassword } from '@/lib/auth';
 
 export async function PUT(
@@ -42,8 +42,16 @@ export async function PUT(
     }
 
     const updatedUser = await updateUser(id, updates);
+
+    // Keep denormalized jury_name in sync across exams when a jury is renamed.
+    let propagatedExams = 0;
+    const nameChanged = updates.name && updates.name !== existing.name;
+    if (nameChanged && (updatedUser.role === 'jury' || existing.role === 'jury')) {
+      propagatedExams = await updateExamsJuryName(id, updatedUser.name);
+    }
+
     const { password: _pw, ...safeUser } = updatedUser;
-    return NextResponse.json({ success: true, user: safeUser });
+    return NextResponse.json({ success: true, user: safeUser, propagatedExams });
   } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
@@ -71,6 +79,18 @@ export async function DELETE(
 
     if (existing.role === 'superadmin') {
       return NextResponse.json({ error: 'Cannot delete superadmin account' }, { status: 403 });
+    }
+
+    // Block deletion if the jury still has assigned exams — otherwise those
+    // exams would be left with a dangling jury_id / stale jury_name.
+    if (existing.role === 'jury') {
+      const assigned = await countExamsByJury(id);
+      if (assigned > 0) {
+        return NextResponse.json({
+          error: `Cannot delete: ${existing.name} is still assigned to ${assigned} exam${assigned === 1 ? '' : 's'}. Reassign them first.`,
+          assignedExams: assigned,
+        }, { status: 409 });
+      }
     }
 
     await deleteUser(id);

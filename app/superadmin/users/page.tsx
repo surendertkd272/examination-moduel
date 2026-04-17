@@ -75,8 +75,11 @@ export default function UserManagementPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       setDeletingId(id);
-      await deleteUser(id);
+      const result = await deleteUser(id);
       setDeletingId(null);
+      if (!result.success && result.error) {
+        window.alert(result.error);
+      }
     }
   };
 

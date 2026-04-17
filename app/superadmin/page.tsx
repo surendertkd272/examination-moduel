@@ -103,9 +103,16 @@ export default function SuperAdminPage() {
   const editScoreTotal = Object.values(editScores).reduce<number>((a, b) => a + (typeof b === 'number' ? b : 0), 0);
 
   const juryUsers = users.filter(u => u.role === 'jury');
-  const completedExams = exams.filter(e => e.status === 'Completed');
-  const scheduledExams = exams.filter(e => e.status === 'Scheduled');
-  const inProgressExams = exams.filter(e => e.status === 'In-Progress');
+
+  // Source of truth for a jury's display name is the users table, not the
+  // denormalized exams.jury_name column (which can go stale if the rename
+  // propagation ever fails or predates the propagation logic).
+  const juryNameById = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const u of users) if (u.role === 'jury') map.set(u.id, u.name);
+    return map;
+  }, [users]);
+  const displayJuryName = (exam: Exam) => juryNameById.get(exam.juryId) || exam.juryName;
 
   // Filter exams by selected month
   const monthFilteredExams = useMemo(() => {
@@ -114,6 +121,17 @@ export default function SuperAdminPage() {
       return d.getFullYear() === viewMonth.year && d.getMonth() === viewMonth.month;
     });
   }, [exams, viewMonth]);
+
+  // Counts reflect the month currently in view so the numbers match the cards below.
+  const examCounts = useMemo(() => {
+    const counts = { total: monthFilteredExams.length, completed: 0, scheduled: 0, inProgress: 0 };
+    for (const e of monthFilteredExams) {
+      if (e.status === 'Completed') counts.completed++;
+      else if (e.status === 'Scheduled') counts.scheduled++;
+      else if (e.status === 'In-Progress') counts.inProgress++;
+    }
+    return counts;
+  }, [monthFilteredExams]);
 
   const filteredExams = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
@@ -124,7 +142,7 @@ export default function SuperAdminPage() {
       return (
         (student?.profile.name || '').toLowerCase().includes(q) ||
         exam.studentId.toLowerCase().includes(q) ||
-        exam.juryName.toLowerCase().includes(q) ||
+        (juryNameById.get(exam.juryId) || exam.juryName || '').toLowerCase().includes(q) ||
         exam.status.toLowerCase().includes(q) ||
         String(exam.level).includes(q)
       );
@@ -305,14 +323,19 @@ export default function SuperAdminPage() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '24px' }}>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              <div style={{ background: '#f1f5f9', padding: '6px 14px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                Total <span style={{ color: '#1e293b', marginLeft: '4px', fontSize: '14px' }}>{exams.length}</span>
+              <div style={{ background: '#f1f5f9', padding: '6px 14px', borderRadius: '8px', border: '1px solid #e2e8f0' }} title={`${monthName} — all exams in view`}>
+                Total <span style={{ color: '#1e293b', marginLeft: '4px', fontSize: '14px' }}>{examCounts.total}</span>
               </div>
               <div style={{ background: '#ecfdf5', padding: '6px 14px', borderRadius: '8px', border: '1px solid #bbf7d0', color: '#065f46' }}>
-                Done <span style={{ color: '#059669', marginLeft: '4px', fontSize: '14px' }}>{completedExams.length}</span>
+                Done <span style={{ color: '#059669', marginLeft: '4px', fontSize: '14px' }}>{examCounts.completed}</span>
               </div>
+              {examCounts.inProgress > 0 && (
+                <div style={{ background: '#fff7ed', padding: '6px 14px', borderRadius: '8px', border: '1px solid #fed7aa', color: '#9a3412' }}>
+                  Ongoing <span style={{ color: '#ea580c', marginLeft: '4px', fontSize: '14px' }}>{examCounts.inProgress}</span>
+                </div>
+              )}
               <div style={{ background: '#eff6ff', padding: '6px 14px', borderRadius: '8px', border: '1px solid #bfdbfe', color: '#1e40af' }}>
-                Next <span style={{ color: '#2563eb', marginLeft: '4px', fontSize: '14px' }}>{scheduledExams.length}</span>
+                Next <span style={{ color: '#2563eb', marginLeft: '4px', fontSize: '14px' }}>{examCounts.scheduled}</span>
               </div>
             </div>
             <button onClick={() => setShowScheduleModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '0 24px', minHeight: '44px', fontSize: '14px', borderRadius: '10px', boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)' }}>
@@ -359,7 +382,7 @@ export default function SuperAdminPage() {
                       </span>
                     </div>
                     <div style={{ fontSize: '12px', color: isSelected ? 'rgba(255,255,255,0.8)' : '#6b7280' }}>
-                      Level {exam.level} {student?.profile.level_category && `(${student.profile.level_category})`} • {exam.juryName}
+                      Level {exam.level} {student?.profile.level_category && `(${student.profile.level_category})`} • {displayJuryName(exam)}
                     </div>
                     <div style={{ fontSize: '11px', color: isSelected ? 'rgba(255,255,255,0.9)' : color.border, marginTop: '8px', fontWeight: 600 }}>
                       {exam.date} {exam.time}
@@ -529,10 +552,10 @@ export default function SuperAdminPage() {
                 <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#9ca3af', marginBottom: '10px', letterSpacing: '0.5px' }}>Assigned Jury</div>
                 <div style={{ background: 'white', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '14px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#fef9c3', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a16207', fontWeight: 800, fontSize: '14px' }}>
-                    {(editExamMode ? (users.find(u => u.id === editExamForm.juryId)?.name || exam.juryName) : exam.juryName).charAt(0)}
+                    {(editExamMode ? (users.find(u => u.id === editExamForm.juryId)?.name || displayJuryName(exam)) : displayJuryName(exam)).charAt(0)}
                   </div>
                   <div>
-                    <div style={{ fontSize: '14px', fontWeight: 600 }}>{editExamMode ? (users.find(u => u.id === editExamForm.juryId)?.name || exam.juryName) : exam.juryName}</div>
+                    <div style={{ fontSize: '14px', fontWeight: 600 }}>{editExamMode ? (users.find(u => u.id === editExamForm.juryId)?.name || displayJuryName(exam)) : displayJuryName(exam)}</div>
                     <div style={{ fontSize: '12px', color: '#6b7280' }}>@{jury?.username || exam.juryId}</div>
                   </div>
                 </div>
