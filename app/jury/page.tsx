@@ -50,18 +50,18 @@ export default function JurySchedulePage() {
       </div>
 
       {/* Summary stats */}
-      <div className="student-stats-mobile" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-        <div style={{ background: 'white', borderRadius: '12px', border: '1px solid var(--border-color)', padding: '14px', textAlign: 'center' }}>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary-color)' }}>{studentGroups.length}</div>
-          <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Students</div>
+      <div className="student-stats-mobile" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+        <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid var(--border-color)', padding: '20px', textAlign: 'center', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+          <div style={{ fontSize: '28px', fontWeight: 900, color: 'var(--text-main)' }}>{studentGroups.length}</div>
+          <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>Students</div>
         </div>
-        <div style={{ background: 'white', borderRadius: '12px', border: '1px solid var(--border-color)', padding: '14px', textAlign: 'center' }}>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#f59e0b' }}>{pendingCount}</div>
-          <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Pending</div>
+        <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid var(--border-color)', padding: '20px', textAlign: 'center', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+          <div style={{ fontSize: '28px', fontWeight: 900, color: '#f59e0b' }}>{pendingCount}</div>
+          <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>Pending</div>
         </div>
-        <div style={{ background: 'white', borderRadius: '12px', border: '1px solid var(--border-color)', padding: '14px', textAlign: 'center' }}>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#10b981' }}>{completedCount}</div>
-          <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Completed</div>
+        <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid var(--border-color)', padding: '20px', textAlign: 'center', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+          <div style={{ fontSize: '28px', fontWeight: 900, color: '#10b981' }}>{completedCount}</div>
+          <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>Scored</div>
         </div>
       </div>
 
@@ -87,10 +87,11 @@ export default function JurySchedulePage() {
                 {/* Student info header */}
                 <div style={{ padding: '16px 20px', borderBottom: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{
-                    width: '52px', height: '52px', borderRadius: '14px',
-                    background: allCompleted ? 'linear-gradient(135deg,#10b981,#059669)' : 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
+                    width: '60px', height: '60px', borderRadius: '18px',
+                    background: allCompleted ? 'linear-gradient(135deg,#10b981,#059669)' : 'linear-gradient(135deg,#7c3aed,#4f46e5)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'white', fontWeight: 800, fontSize: '20px', flexShrink: 0,
+                    color: 'white', fontWeight: 900, fontSize: '24px', flexShrink: 0,
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
                   }}>
                     {(student?.profile.name || studentId).charAt(0)}
                   </div>
@@ -110,9 +111,9 @@ export default function JurySchedulePage() {
                     <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
                       {assignedLevels.map(l => (
                         <span key={l} style={{
-                          fontSize: '10px', fontWeight: 800, textTransform: 'uppercase',
-                          padding: '2px 8px', borderRadius: '4px',
-                          background: '#FFD600', color: '#1E3A8A',
+                          fontSize: '11px', fontWeight: 800, textTransform: 'uppercase',
+                          padding: '3px 10px', borderRadius: '6px',
+                          background: 'var(--primary-color)', color: 'white', border: 'none'
                         }}>
                           Level {l}
                         </span>
@@ -152,6 +153,11 @@ export default function JurySchedulePage() {
                             <div>
                               <div style={{ fontWeight: 700, fontSize: '14px', color: 'var(--text-main)' }}>
                                 Level {exam.level} Evaluation
+                                {student?.profile.level_category && (
+                                  <span style={{ fontSize: '10px', marginLeft: '6px', padding: '2px 6px', background: '#fef3c7', color: '#92400e', borderRadius: '4px', textTransform: 'uppercase' }}>
+                                    {student.profile.level_category}
+                                  </span>
+                                )}
                               </div>
                               <div style={{ display: 'flex', gap: '10px', fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -196,12 +202,12 @@ export default function JurySchedulePage() {
       )}
 
       {/* Scoring tip */}
-      <div style={{ background: 'var(--primary-color)', color: 'white', padding: '20px', borderRadius: '16px', marginTop: '8px' }}>
-        <h4 style={{ fontWeight: 700, marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <GraduationCap size={18} /> Scoring Guide
+      <div style={{ background: 'linear-gradient(135deg,#7c3aed,#4f46e5)', color: 'white', padding: '24px', borderRadius: '20px', marginTop: '8px', boxShadow: '0 10px 25px -5px rgba(124,58,237,0.4)' }}>
+        <h4 style={{ fontWeight: 800, marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '16px' }}>
+          <GraduationCap size={20} /> Professional Evaluation Mode
         </h4>
-        <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>
-          Select a student level to begin scoring. All items use numeric scoring (0–N). Dress Code is now scored numerically just like all other categories. Each level has its own rubric automatically loaded.
+        <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, fontWeight: 500 }}>
+          Ensure all criteria are evaluated strictly according to the rubric. Results are synced in real-time to the Superadmin dashboard.
         </p>
       </div>
     </div>

@@ -94,9 +94,9 @@ export default function UserManagementPage() {
       </div>
 
       {/* User cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
         {users.filter(u => u.role !== 'superadmin').map((u) => (
-          <div key={u.id} style={{ background: 'white', borderRadius: '14px', border: '1px solid var(--border-color)', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
+          <div key={u.id} className="card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {editingId === u.id ? (
               /* Inline Edit Form */
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -149,8 +149,8 @@ export default function UserManagementPage() {
                     {u.role === 'admin' ? <Shield size={24} /> : <User size={24} />}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <h4 style={{ fontWeight: 700, fontSize: '15px', margin: 0 }}>{u.name}</h4>
-                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: '2px 0 0' }}>@{u.username}</p>
+                    <h4 style={{ fontWeight: 900, fontSize: '17px', margin: 0, color: 'var(--text-main)', letterSpacing: '-0.01em' }}>{u.name}</h4>
+                    <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '4px 0 0', fontWeight: 600 }}>@{u.username}</p>
                   </div>
                   <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
                     <button onClick={() => openEdit(u)} style={{ background: '#eff6ff', border: 'none', minHeight: 'auto', padding: '8px', color: '#3b82f6', borderRadius: '8px' }} title="Edit user">
@@ -161,13 +161,13 @@ export default function UserManagementPage() {
                     </button>
                   </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f3f4f6', paddingTop: '14px' }}>
-                  <span style={{ fontSize: '10px', textTransform: 'uppercase', fontWeight: 900, padding: '3px 10px', borderRadius: '4px', background: u.role === 'admin' ? '#2563eb' : '#eab308', color: 'white' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f1f5f9', paddingTop: '16px', marginTop: '4px' }}>
+                  <span style={{ fontSize: '10px', textTransform: 'uppercase', fontWeight: 900, padding: '4px 12px', borderRadius: '6px', background: u.role === 'admin' ? '#7c3aed' : '#fbbf24', color: 'white', letterSpacing: '0.05em' }}>
                     {u.role}
                   </span>
-                  <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Mail size={12} />
-                    <span style={{ color: u.status === 'active' ? '#10b981' : '#ef4444', fontWeight: 600 }}>{u.status || 'active'}</span>
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700 }}>
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: u.status === 'active' ? '#10b981' : '#ef4444' }}></div>
+                    <span style={{ color: u.status === 'active' ? '#059669' : '#dc2626', textTransform: 'capitalize' }}>{u.status || 'active'}</span>
                   </span>
                 </div>
               </>

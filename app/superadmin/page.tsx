@@ -5,6 +5,7 @@ import { useData } from '@/context/DataContext';
 import { Search, ChevronLeft, ChevronRight, X, Check, Plus, Edit2, Trash2, Save, Minus } from 'lucide-react';
 import type { Exam } from '@/context/DataContext';
 import ScoringEngine from '@/components/scoring/ScoringEngine';
+import StudentOverlay from '@/components/StudentOverlay';
 
 export default function SuperAdminPage() {
   const { students, exams, users, scoringTemplates } = useData();
@@ -23,16 +24,14 @@ export default function SuperAdminPage() {
   const [savingScores, setSavingScores] = useState(false);
 
   const [activeJuries, setActiveJuries] = useState<Set<string>>(new Set());
+  const [selectedStudentId, setSelectedStudentId] = useState<string | null>(null);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [scheduleForm, setScheduleForm] = useState<{
-    studentId: string;
     date: string;
     time: string;
-    selectedLevels: number[];
-    levelJuryMap: Record<number, string>; // level -> juryId
+    groups: Record<string, { selectedStudents: string[]; juryId: string; level: number; category: string }>;
   }>({
-    studentId: '', date: '', time: '09:00 AM',
-    selectedLevels: [], levelJuryMap: {},
+    date: '', time: '09:00 AM', groups: {}
   });
   const [scheduling, setScheduling] = useState(false);
   const [scheduleSuccess, setScheduleSuccess] = useState(false);
@@ -140,42 +139,70 @@ export default function SuperAdminPage() {
     });
   };
 
+  // Group students by Level and Category for Batch Scheduling modal
+  const batchGroups = useMemo(() => {
+    const map = new Map<string, { level: number; category: string; key: string; students: typeof students }>();
+    students.forEach(s => {
+      const cat = s.profile.level_category || 'General';
+      (s.progression.levels || []).forEach(l => {
+        const key = `${l}_${cat}`;
+        if (!map.has(key)) {
+          map.set(key, { level: l, category: cat, key, students: [] });
+        }
+        map.get(key)!.students.push(s);
+      });
+    });
+    return Array.from(map.values()).sort((a, b) => {
+      if (a.level !== b.level) return a.level - b.level;
+      return a.category.localeCompare(b.category);
+    });
+  }, [students]);
+
   const handleScheduleExam = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (scheduleForm.selectedLevels.length === 0) return;
     setScheduling(true);
-    let allOk = true;
-    for (const level of scheduleForm.selectedLevels) {
-      const juryId = scheduleForm.levelJuryMap[level];
-      if (!juryId) continue;
-      const ok = await addExam({
-        studentId: scheduleForm.studentId, juryId,
-        level, date: scheduleForm.date, time: scheduleForm.time,
-      });
-      if (!ok) allOk = false;
-    }
-    setScheduling(false);
-    if (allOk) {
+    try {
+      for (const groupKey in scheduleForm.groups) {
+        const group = scheduleForm.groups[groupKey];
+        if (group.selectedStudents.length === 0) continue;
+
+        for (const studentId of group.selectedStudents) {
+          await addExam({
+            studentId,
+            juryId: group.juryId,
+            level: group.level,
+            date: scheduleForm.date,
+            time: scheduleForm.time,
+          });
+        }
+      }
       setScheduleSuccess(true);
       setTimeout(() => {
-        setScheduleSuccess(false); setShowScheduleModal(false);
-        setScheduleForm({ studentId: '', date: '', time: '09:00 AM', selectedLevels: [], levelJuryMap: {} });
-      }, 1500);
+        setScheduleSuccess(false);
+        setScheduleForm({ ...scheduleForm, groups: {} });
+        setShowScheduleModal(false);
+      }, 2000);
+    } catch {
+      setScheduling(false);
     }
   };
 
-  // When student is selected in schedule form, auto-set levels from student's levels
-  const selectedScheduleStudent = students.find(s => s.profile.unique_id === scheduleForm.studentId);
-
-  // Auto-populate selectedLevels when student changes
-  const handleStudentSelect = (studentId: string) => {
+  const handleStudentSelect = (studentId?: string) => {
+    if (!studentId) {
+      setScheduleForm({ date: '', time: '09:00 AM', groups: {} });
+      return;
+    }
     const student = students.find(s => s.profile.unique_id === studentId);
-    const levels = student?.progression.levels || [];
-    setScheduleForm(f => ({
-      ...f, studentId,
-      selectedLevels: levels,
-      levelJuryMap: levels.reduce((m, l) => ({ ...m, [l]: '' }), {} as Record<number, string>),
-    }));
+    if (!student) return;
+    
+    const cat = student.profile.level_category || 'General';
+    const initGroups: typeof scheduleForm.groups = {};
+    
+    (student.progression.levels || []).forEach(l => {
+      const key = `${l}_${cat}`;
+      initGroups[key] = { selectedStudents: [student.profile.unique_id], juryId: '', level: l, category: cat };
+    });
+    setScheduleForm(f => ({ ...f, groups: initGroups }));
   };
 
   const cardColors = [
@@ -202,7 +229,10 @@ export default function SuperAdminPage() {
         {/* Available Juries */}
         <div className="list-section">
           <div className="list-header">Available Juries</div>
-          {juryUsers.map((jury, i) => {
+          {juryUsers.filter(u => 
+            u.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+            u.username.toLowerCase().includes(searchQuery.toLowerCase())
+          ).map((jury, i) => {
             const isActive = activeJuries.size === 0 || activeJuries.has(jury.id);
             return (
               <div key={jury.id} className={`list-item ${isActive ? 'checked' : ''}`} onClick={() => toggleJury(jury.id)} style={{ cursor: 'pointer' }}>
@@ -225,13 +255,28 @@ export default function SuperAdminPage() {
             <span>Student Queue</span>
             <span style={{ background: '#e5e7eb', padding: '2px 6px', borderRadius: '4px', color: '#6b7280' }}>{students.length}</span>
           </div>
-          {students.map((student) => (
-            <div key={student.profile.unique_id} className="list-item" style={{ padding: '12px 0' }}>
+          {students.filter(s => 
+            s.profile.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+            s.profile.unique_id.toLowerCase().includes(searchQuery.toLowerCase())
+          ).map((student) => (
+            <div 
+              key={student.profile.unique_id} 
+              className="list-item" 
+              style={{ padding: '12px 0', cursor: 'pointer' }}
+              onClick={() => setSelectedStudentId(student.profile.unique_id)}
+            >
               <div className="list-avatar" style={{ background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 800, fontSize: '12px', borderRadius: '50%' }}>
                 {student.profile.name.charAt(0)}
               </div>
-              <div>
-                <div className="list-text">{student.profile.name}</div>
+              <div style={{ flex: 1 }}>
+                <div className="list-text" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {student.profile.name}
+                  {student.profile.level_category && (
+                    <span style={{ fontSize: '9px', fontWeight: 800, background: '#fef3c7', color: '#92400e', padding: '1px 5px', borderRadius: '4px', textTransform: 'uppercase' }}>
+                      {student.profile.level_category}
+                    </span>
+                  )}
+                </div>
                 <div className="list-subtext">
                   {student.progression.levels.map(l => `L${l}`).join(', ')} • {student.profile.unique_id}
                 </div>
@@ -303,12 +348,18 @@ export default function SuperAdminPage() {
                       <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: isSelected ? 'rgba(255,255,255,0.3)' : '#e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: isSelected ? 'white' : '#374151' }}>
                         {(student?.profile.name || exam.studentId).charAt(0)}
                       </div>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: isSelected ? 'white' : '#111827' }}>
+                      <span 
+                        style={{ fontSize: '13px', fontWeight: 700, color: isSelected ? 'white' : '#111827', cursor: 'pointer', borderBottom: isSelected ? '1px dashed white' : '1px dashed #ccc' }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedStudentId(student?.profile.unique_id || exam.studentId);
+                        }}
+                      >
                         {student?.profile.name || exam.studentId}
                       </span>
                     </div>
                     <div style={{ fontSize: '12px', color: isSelected ? 'rgba(255,255,255,0.8)' : '#6b7280' }}>
-                      Level {exam.level} • {exam.juryName}
+                      Level {exam.level} {student?.profile.level_category && `(${student.profile.level_category})`} • {exam.juryName}
                     </div>
                     <div style={{ fontSize: '11px', color: isSelected ? 'rgba(255,255,255,0.9)' : color.border, marginTop: '8px', fontWeight: 600 }}>
                       {exam.date} {exam.time}
@@ -380,11 +431,20 @@ export default function SuperAdminPage() {
                   <div>
                     <div style={{ fontSize: '16px', fontWeight: 700 }}>{student?.profile.name || exam.studentId}</div>
                     <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '3px' }}>
-                      {exam.studentId} • {student?.profile.school || 'Unknown'}
+                      {exam.studentId} • {student?.profile.school || 'Unknown'} • {student?.profile.level_category || 'General'}
                     </div>
                     {student && (
-                      <div style={{ fontSize: '12px', color: '#6b7280' }}>
-                        Age {student.profile.age} • {student.profile.class} • Levels: {student.progression.levels.join(', ')}
+                      <div style={{ fontSize: '13px', color: 'var(--text-muted)', display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <span>Age {student.profile.age} • {student.profile.class}</span>
+                        {student.profile.level_category && (
+                          <span className="detail-tag" style={{ background: '#fef3c7', color: '#92400e', border: '1px solid #fde68a' }}>{student.profile.level_category}</span>
+                        )}
+                      </div>
+                    )}
+                    {student && (
+                      <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
+                        <span style={{ fontSize: '11px', background: '#f1f5f9', padding: '3px 8px', borderRadius: '6px', fontWeight: 700, color: '#475569' }}>Events: {student.background_questionnaire.events_attended ? 'Yes' : 'No'}</span>
+                        <span style={{ fontSize: '11px', background: '#f1f5f9', padding: '3px 8px', borderRadius: '6px', fontWeight: 700, color: '#475569' }}>Medals: {student.background_questionnaire.medals_won ? 'Yes' : 'No'}</span>
                       </div>
                     )}
                   </div>
@@ -617,68 +677,12 @@ export default function SuperAdminPage() {
       {/* Schedule Exam Modal */}
       {showScheduleModal && (
         <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', zIndex: 200, padding: '16px' }}>
-          <div className="card" style={{ width: '100%', maxWidth: '480px', background: 'white', padding: '32px' }}>
+          <div className="card" style={{ width: '100%', maxWidth: '480px', background: 'white', padding: '32px', color: '#0f172a' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 700 }}>Schedule New Exam</h3>
               <button onClick={() => setShowScheduleModal(false)} style={{ background: 'transparent', border: 'none', padding: '6px', minHeight: 'auto', color: '#6b7280', cursor: 'pointer' }}><X size={20} /></button>
             </div>
             <form onSubmit={handleScheduleExam} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontSize: '13px', fontWeight: 600 }}>Student</label>
-                <select value={scheduleForm.studentId} onChange={e => handleStudentSelect(e.target.value)} required style={{ minHeight: '44px', padding: '0 14px', fontSize: '14px', border: '1px solid var(--border-color)', borderRadius: '8px', background: 'white' }}>
-                  <option value="">Select student...</option>
-                  {students.map(s => (
-                    <option key={s.profile.unique_id} value={s.profile.unique_id}>
-                      {s.profile.name} ({s.profile.unique_id}) — Levels: {s.progression.levels.join(', ')}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {scheduleForm.studentId && (
-                <div style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <label style={{ fontSize: '13px', fontWeight: 600 }}>Assign Juries per Level</label>
-                  {selectedScheduleStudent?.progression.levels.map(level => {
-                    const isSelected = scheduleForm.selectedLevels.includes(level);
-                    return (
-                      <div key={level} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '80px' }}>
-                          <input 
-                            type="checkbox" 
-                            checked={isSelected}
-                            onChange={(e) => {
-                              setScheduleForm(f => ({
-                                ...f,
-                                selectedLevels: e.target.checked 
-                                  ? [...f.selectedLevels, level] 
-                                  : f.selectedLevels.filter(l => l !== level)
-                              }));
-                            }}
-                          />
-                          <span style={{ fontSize: '14px', fontWeight: 600 }}>Level {level}</span>
-                        </div>
-                        <select 
-                          value={scheduleForm.levelJuryMap[level] || ''} 
-                          onChange={e => setScheduleForm(f => ({
-                            ...f,
-                            levelJuryMap: { ...f.levelJuryMap, [level]: e.target.value }
-                          }))}
-                          disabled={!isSelected}
-                          required={isSelected}
-                          style={{ flex: 1, minHeight: '38px', padding: '0 10px', fontSize: '13px', border: '1px solid var(--border-color)', borderRadius: '6px', background: isSelected ? 'white' : '#f1f5f9', opacity: isSelected ? 1 : 0.6 }}
-                        >
-                          <option value="">Select jury...</option>
-                          {juryUsers.map(j => <option key={j.id} value={j.id}>{j.name} (@{j.username})</option>)}
-                        </select>
-                      </div>
-                    );
-                  })}
-                  {scheduleForm.selectedLevels.length === 0 && (
-                    <div style={{ fontSize: '12px', color: '#ef4444' }}>Please select at least one level to schedule.</div>
-                  )}
-                </div>
-              )}
-
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={{ fontSize: '13px', fontWeight: 600 }}>Date</label>
@@ -690,9 +694,80 @@ export default function SuperAdminPage() {
                 </div>
               </div>
 
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '420px', overflowY: 'auto', paddingRight: '4px' }}>
+                <label style={{ fontSize: '13px', fontWeight: 600 }}>Select Students & Assign Jury</label>
+                {batchGroups.map(group => {
+                  const formGroup = scheduleForm.groups[group.key] || { selectedStudents: [], juryId: '', level: group.level, category: group.category };
+                  const isAllSelected = group.students.length > 0 && formGroup.selectedStudents.length === group.students.length;
+                  
+                  const toggleAll = () => {
+                    const nextStudents = isAllSelected ? [] : group.students.map(s => s.profile.unique_id);
+                    setScheduleForm(f => ({
+                      ...f,
+                      groups: { ...f.groups, [group.key]: { ...formGroup, selectedStudents: nextStudents } }
+                    }));
+                  };
+
+                  const toggleStudent = (id: string) => {
+                    const nextStudents = formGroup.selectedStudents.includes(id) 
+                      ? formGroup.selectedStudents.filter(sId => sId !== id)
+                      : [...formGroup.selectedStudents, id];
+                    setScheduleForm(f => ({
+                      ...f,
+                      groups: { ...f.groups, [group.key]: { ...formGroup, selectedStudents: nextStudents } }
+                    }));
+                  };
+
+                  return (
+                    <div key={group.key} style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px' }}>
+                        <div style={{ fontWeight: 700, fontSize: '14px', color: '#1e3a8a', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          Level {group.level} 
+                          {group.category && group.category !== 'General' && (
+                            <span style={{ fontSize: '10px', background: '#fef3c7', color: '#92400e', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase' }}>
+                              {group.category}
+                            </span>
+                          )}
+                        </div>
+                        <select 
+                          value={formGroup.juryId} 
+                          onChange={e => setScheduleForm(f => ({
+                            ...f, groups: { ...f.groups, [group.key]: { ...formGroup, juryId: e.target.value } }
+                          }))}
+                          required={formGroup.selectedStudents.length > 0}
+                          style={{ minHeight: '32px', padding: '0 8px', fontSize: '12px', border: '1px solid var(--border-color)', borderRadius: '6px' }}
+                        >
+                          <option value="">Select jury...</option>
+                          {juryUsers.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
+                        </select>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                        <input type="checkbox" checked={isAllSelected} onChange={toggleAll} style={{ cursor: 'pointer' }} />
+                        <span style={{ fontSize: '12px', fontWeight: 600 }}>Select All ({group.students.length})</span>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', maxHeight: '140px', overflowY: 'auto' }}>
+                        {group.students.map(s => {
+                          const isSelected = formGroup.selectedStudents.includes(s.profile.unique_id);
+                          return (
+                            <div key={s.profile.unique_id} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 8px', background: isSelected ? '#eff6ff' : 'white', borderRadius: '6px', border: `1px solid ${isSelected ? '#bfdbfe' : '#e2e8f0'}` }}>
+                              <input type="checkbox" checked={isSelected} onChange={() => toggleStudent(s.profile.unique_id)} style={{ cursor: 'pointer' }} />
+                              <div style={{ fontSize: '12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {s.profile.name} <span style={{ color: '#64748b' }}>({s.profile.unique_id})</span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
               <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
                 <button type="button" onClick={() => setShowScheduleModal(false)} style={{ flex: 1, background: '#f3f4f6', color: '#6b7280', border: 'none' }}>Cancel</button>
-                <button type="submit" disabled={scheduling || scheduleSuccess || scheduleForm.selectedLevels.length === 0} style={{ flex: 2, background: scheduleSuccess ? '#10b981' : 'var(--primary-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <button type="submit" disabled={scheduling || scheduleSuccess || Object.values(scheduleForm.groups).every(g => g.selectedStudents.length === 0)} style={{ flex: 2, background: scheduleSuccess ? '#10b981' : 'var(--primary-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                   {scheduleSuccess ? <><Check size={18} /> Scheduled!</> : scheduling ? 'Scheduling...' : <><Plus size={18} /> Schedule Exam</>}
                 </button>
               </div>
@@ -707,6 +782,19 @@ export default function SuperAdminPage() {
           to { opacity: 1; transform: translateX(0); }
         }
       `}</style>
+      {/* Global Student Detail Overlay */}
+      {selectedStudentId && (
+        <StudentOverlay 
+          studentId={selectedStudentId} 
+          onClose={() => setSelectedStudentId(null)} 
+          onSchedule={() => {
+            const id = selectedStudentId;
+            setSelectedStudentId(null);
+            handleStudentSelect(id);
+            setShowScheduleModal(true);
+          }}
+        />
+      )}
     </div>
   );
 }

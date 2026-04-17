@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     }
 
     const permissionMap: Record<string, string[]> = {
-      admin: ['bulk_upload_students', 'schedule_exams', 'generate_certificates', 'export_reports'],
+      admin: ['bulk_upload_students', 'schedule_exams', 'export_reports'],
       jury: ['view_assigned_schedule', 'input_real_time_scores', 'add_qualitative_remarks', 'offline_data_sync'],
     };
 

@@ -37,6 +37,11 @@ export default function BulkUploadPage() {
         ? levelStr.split(';').map(l => parseInt(l)).filter(l => !isNaN(l))
         : [parseInt(levelStr) || 1];
 
+      const parseYesNo = (val: string) => {
+        const v = (val || '').toLowerCase().trim();
+        return v === 'yes' || v === 'y' || v === 'true' || v === '1';
+      };
+
       students.push({
         profile: {
           name: get('name') || `Student ${i}`,
@@ -47,8 +52,8 @@ export default function BulkUploadPage() {
           unique_id: get('unique_id') || '',
         },
         background_questionnaire: {
-          events_attended: get('events_attended') === 'true',
-          medals_won: parseInt(get('medals_won')) || 0,
+          events_attended: parseYesNo(get('events_attended')),
+          medals_won:      parseYesNo(get('medals_won')),
           objective: (get('objective') as any) || 'Just Fun',
           coach_rating: parseInt(get('coach_rating')) || 5,
         },

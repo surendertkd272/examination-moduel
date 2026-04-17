@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { ShieldAlert, LayoutDashboard, FileText, Users, Settings, LogOut, GraduationCap, Award } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, Settings, LogOut, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -18,7 +18,6 @@ export default function SuperAdminLayout({
     { href: '/superadmin', icon: <LayoutDashboard size={24} />, title: 'Dashboard' },
     { href: '/superadmin/students', icon: <GraduationCap size={24} />, title: 'Students' },
     { href: '/superadmin/users', icon: <Users size={24} />, title: 'Manage Users' },
-    { href: '/superadmin/certificates', icon: <Award size={24} />, title: 'Certificates' },
     { href: '/superadmin/templates', icon: <FileText size={24} />, title: 'Scoring Templates' },
   ];
 
@@ -27,11 +26,7 @@ export default function SuperAdminLayout({
 
   return (
     <div className="app-container">
-      <aside className="sidebar">
-        <div style={{ marginBottom: '40px', color: '#3b82f6' }}>
-          <ShieldAlert size={32} />
-        </div>
-
+      <aside className="sidebar" style={{ background: '#0f172a', borderColor: 'rgba(255,255,255,0.1)' }}>
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '16px', flexGrow: 1 }}>
           {navItems.map((item) => (
             <Link

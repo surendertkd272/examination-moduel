@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { List, ClipboardCheck, History, LogOut, Star } from 'lucide-react';
+import { List, ClipboardCheck, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -22,22 +22,21 @@ export default function JuryLayout({
   return (
     <div className="flex flex-col min-h-screen" style={{ background: 'var(--bg-color)' }}>
       {/* Mobile Top Header */}
-      <header className="flex justify-between items-center sticky" style={{ background: 'var(--primary-color)', color: 'white', padding: '16px', top: 0, zIndex: 50 }}>
-        <div className="flex items-center gap-2">
-          <Star size={24} color="#FFD600" />
-          <h1 className="text-xl font-bold" style={{ letterSpacing: '-0.025em' }}>Equiwings</h1>
+      <header className="flex justify-between items-center sticky" style={{ background: '#ffffff', color: 'var(--text-main)', padding: '12px 16px', top: 0, zIndex: 50, borderBottom: '1px solid var(--border-color)', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+        <div className="flex items-center gap-3">
+          <h1 className="text-lg font-bold uppercase" style={{ letterSpacing: '0.05em' }}>Equiwings</h1>
         </div>
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.7)' }}>Juror</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Juror</p>
             <p className="text-sm font-bold">{user?.name}</p>
           </div>
           <button
             onClick={logout}
             className="rounded-full"
-            style={{ background: 'rgba(255,255,255,0.1)', padding: '8px', border: 'none', minWidth: '40px', minHeight: '40px' }}
+            style={{ background: 'var(--bg-color)', padding: '8px', border: '1px solid var(--border-color)', minWidth: '40px', minHeight: '40px', boxShadow: 'none' }}
           >
-            <LogOut size={20} color="white" />
+            <LogOut size={20} color="var(--text-muted)" />
           </button>
         </div>
       </header>

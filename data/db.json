@@ -15,26 +15,11 @@
         "edit_templates",
         "bulk_upload_students",
         "schedule_exams",
-        "generate_certificates",
         "export_reports"
       ],
       "createdAt": "2026-01-01T00:00:00Z",
       "status": "active"
     },
-    {
-      "id": "u-admin",
-      "name": "Super Admin",
-      "username": "super admin",
-      "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
-      "role": "admin",
-      "permissions": [
-        "bulk_upload_students",
-        "schedule_exams",
-        "generate_certificates",
-        "export_reports"
-      ],
-      "createdAt": "2026-01-15T00:00:00Z",
-      "status": "active"
     },
     {
       "id": "u-jury2",
@@ -69,234 +54,3386 @@
   "students": [
     {
       "profile": {
-        "name": "priyesh mishra",
-        "age": 14,
-        "dob": "2012-05-10",
-        "school": "Riverside Academy",
+        "unique_id": "EQUI-0001",
+        "name": "Bani Agarwal",
         "class": "Grade 8",
-        "unique_id": "EQUI-1001"
-      },
-      "background_questionnaire": {
-        "events_attended": true,
-        "medals_won": 2,
-        "objective": "Nationals",
-        "coach_rating": 7
-      },
-      "progression": {
-        "levels": [
-          1,
-          2,
-          3
-        ],
-        "timeline_lock_status": false,
-        "last_exam_date": "2026-04-15"
-      }
-    },
-    {
-      "profile": {
-        "name": "Julian Brooks",
-        "age": 12,
-        "dob": "2014-08-22",
-        "school": "Oakwood High",
-        "class": "Grade 6",
-        "unique_id": "EQUI-1002"
+        "phone": "6239102505",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
       },
       "background_questionnaire": {
         "events_attended": false,
         "medals_won": 0,
-        "objective": "Passion",
-        "coach_rating": 6
+        "objective": "",
+        "coach_rating": 0
       },
       "progression": {
         "levels": [
           1
         ],
         "timeline_lock_status": false,
-        "last_exam_date": "2026-04-14"
+        "last_exam_date": ""
       }
     },
     {
       "profile": {
-        "name": "Sophia Chen",
-        "age": 15,
-        "dob": "2011-03-18",
-        "school": "Westfield Prep",
-        "class": "Grade 9",
-        "unique_id": "EQUI-1003"
+        "unique_id": "EQUI-0002",
+        "name": "Amolika Kaushal",
+        "class": "Grade 11",
+        "phone": "6307741904",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
       },
       "background_questionnaire": {
-        "events_attended": true,
-        "medals_won": 5,
-        "objective": "International",
-        "coach_rating": 9
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
       },
       "progression": {
         "levels": [
-          2,
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0003",
+        "name": "Mohammed Mustafa Mohiuddin",
+        "class": "Grade 7",
+        "phone": "9000024971",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0004",
+        "name": "Mohammed Saad Muzakkir",
+        "class": "Grade 7",
+        "phone": "9000024971",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0005",
+        "name": "Mohammed Iqbaluddin Mudassir",
+        "class": "Grade 7",
+        "phone": "9000024971",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0006",
+        "name": "Nihal Raman Bookya",
+        "class": "Grade 5",
+        "phone": "",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0007",
+        "name": "Hanvitha Raman Bookya",
+        "class": "Grade 9",
+        "phone": "9491399974",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0008",
+        "name": "Sara Fatema",
+        "class": "Grade 8",
+        "phone": "9885741012",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0009",
+        "name": "Rudra Dev Yadav",
+        "class": "Grade 8",
+        "phone": "8466808457",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0010",
+        "name": "Ira Yadav",
+        "class": "Grade 6",
+        "phone": "9866808457",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0011",
+        "name": "Vishnuth Gupta Malyala",
+        "class": "Grade 5",
+        "phone": "9666984228",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0012",
+        "name": "Syed Ammaur Quadri",
+        "class": "Grade 5",
+        "phone": "9000566406",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0013",
+        "name": "Yashika Sagar",
+        "class": "Grade 6",
+        "phone": "7874977144",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0014",
+        "name": "Gautam Krishna",
+        "class": "Grade 4",
+        "phone": "8885178200",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0015",
+        "name": "Siddharth Sagar",
+        "class": "Grade 5",
+        "phone": "7874977144",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0016",
+        "name": "Ayaan Ram Muppala",
+        "class": "Grade 4",
+        "phone": "7032262025",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0017",
+        "name": "Kiana Jain",
+        "class": "Grade 5",
+        "phone": "9440807162",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0018",
+        "name": "Hafsa Quraishi",
+        "class": "Grade 5",
+        "phone": "9885221444",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0019",
+        "name": "Umar Dheeraj Tolani",
+        "class": "Grade 6",
+        "phone": "9493277777",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0020",
+        "name": "Serah Zoha Mowla",
+        "class": "Grade 7",
+        "phone": "6897445486",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0021",
+        "name": "Nirvi Rao Myle",
+        "class": "Grade 5",
+        "phone": "9550392345",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0022",
+        "name": "Avehal Kapur Natarajan",
+        "class": "Grade 8",
+        "phone": "9908793775",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0023",
+        "name": "Mahesh Bhavanam Reddy",
+        "class": "Grade 6",
+        "phone": "6509277774",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0024",
+        "name": "Vaishnavi Sankineani",
+        "class": "Grade 6",
+        "phone": "9704305380",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0025",
+        "name": "Ananya Sankineani",
+        "class": "Grade 6",
+        "phone": "9704305380",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0026",
+        "name": "Kadamash K",
+        "class": "Grade 8",
+        "phone": "9618551899",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          1
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0027",
+        "name": "Vedika Iyer",
+        "class": "Grade 1",
+        "phone": "7670825725",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0028",
+        "name": "Rishika Das Gupta",
+        "class": "Grade 11",
+        "phone": "9399944493",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0029",
+        "name": "Risha Madhavram",
+        "class": "Grade 6",
+        "phone": "9948630989",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0030",
+        "name": "Sritani Neerumalla",
+        "class": "Grade 9",
+        "phone": "9059061095",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0031",
+        "name": "Lakshmi Kshetra",
+        "class": "Grade 9",
+        "phone": "7093580350",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0032",
+        "name": "Vidhya Sri",
+        "class": "Grade 4",
+        "phone": "9440408512",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0033",
+        "name": "SM Vivek",
+        "class": "Grade 10",
+        "phone": "9160090009",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0034",
+        "name": "Sreethan Patel Byreddy",
+        "class": "Grade 6",
+        "phone": "8897908195",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0035",
+        "name": "P Guna Kaushal",
+        "class": "Grade 9",
+        "phone": "9985371414",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0036",
+        "name": "Rajveer Bhalerao",
+        "class": "Grade 5",
+        "phone": "9009900699",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0037",
+        "name": "KNS Vishwas",
+        "class": "Grade 5",
+        "phone": "9948630989",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0038",
+        "name": "Myra Tibrewaala",
+        "class": "Grade 7",
+        "phone": "9396843777",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0039",
+        "name": "M V Vihaan Vardhan",
+        "class": "Grade 4",
+        "phone": "9966132199",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0040",
+        "name": "Aliyah Singh",
+        "class": "Grade 4",
+        "phone": "7506755521",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0041",
+        "name": "Hammasqadir Ali Khan",
+        "class": "Grade 6",
+        "phone": "9949929857",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0042",
+        "name": "Viaan Karuvath",
+        "class": "Grade 5",
+        "phone": "9848777582",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0043",
+        "name": "Swara Vujjini",
+        "class": "Grade 3",
+        "phone": "8008083419",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0044",
+        "name": "Sai Neerumalla",
+        "class": "Grade 9",
+        "phone": "9059061095",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0045",
+        "name": "Nishka G",
+        "class": "Grade 7",
+        "phone": "9502087000",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0046",
+        "name": "Samyuktha Dhiankar",
+        "class": "Grade 5",
+        "phone": "8096011999",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0047",
+        "name": "Hridaan Thakwani",
+        "class": "Grade 5",
+        "phone": "9885813613",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0048",
+        "name": "Anaya Jain",
+        "class": "Grade 7",
+        "phone": "9052000411",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0049",
+        "name": "Kaan",
+        "class": "Grade 5",
+        "phone": "9358500826",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0050",
+        "name": "Sai Kashalad Chakravarthy",
+        "class": "Grade 6",
+        "phone": "9034205686",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0051",
+        "name": "Griha Jain",
+        "class": "Grade 9",
+        "phone": "9505588886",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0052",
+        "name": "Ishaan Yadav Kukuta",
+        "class": "Grade 6",
+        "phone": "9949708651",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0053",
+        "name": "Krithika Shon",
+        "class": "Grade 5",
+        "phone": "8328575094",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0054",
+        "name": "Rudramba Rao Chrumilla",
+        "class": "Grade 4",
+        "phone": "9780405410",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0055",
+        "name": "Danish Zayed",
+        "class": "Grade 8",
+        "phone": "8297371668",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0056",
+        "name": "Saroya Manaal",
+        "class": "Grade 8",
+        "phone": "8297371668",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0057",
+        "name": "Anay Pratik Shah",
+        "class": "Grade 4",
+        "phone": "7799482922",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0058",
+        "name": "Myra Pratham",
+        "class": "Grade 9",
+        "phone": "9515121147",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0059",
+        "name": "Reeyaansh Gupta",
+        "class": "Grade 8",
+        "phone": "9000083419",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0060",
+        "name": "Veer Vined Ammanabolu",
+        "class": "Grade 8",
+        "phone": "9849176543",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0061",
+        "name": "Kaira Sehgal",
+        "class": "Grade 4",
+        "phone": "9885997017",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0062",
+        "name": "S V S Karthikeya",
+        "class": "Grade 6",
+        "phone": "9812299001",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0063",
+        "name": "Arjuna Reddy",
+        "class": "Grade 7",
+        "phone": "9000024915",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0064",
+        "name": "Jiyaan Basheer Chandra",
+        "class": "Grade 9",
+        "phone": "9703101111",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0065",
+        "name": "K Ravraj",
+        "class": "Grade 4",
+        "phone": "9949996896",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0066",
+        "name": "Revanth Attaturi",
+        "class": "Grade 6",
+        "phone": "9703060366",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0067",
+        "name": "Talha M",
+        "class": "Grade 9",
+        "phone": "9436204364",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0068",
+        "name": "Rohini",
+        "class": "Grade 9",
+        "phone": "9866183666",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0069",
+        "name": "Vihaan Allam",
+        "class": "Grade 9",
+        "phone": "9014878546",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0070",
+        "name": "Krish Vhaan Rrachakonda",
+        "class": "Grade 6",
+        "phone": "9866634449",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0071",
+        "name": "Ayaan Dugar",
+        "class": "Grade 5",
+        "phone": "9866551008",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0072",
+        "name": "Zowaina Baig",
+        "class": "Grade 6",
+        "phone": "9866608261",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0073",
+        "name": "Ansh Krovvidi",
+        "class": "Grade 3",
+        "phone": "7337529111",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0074",
+        "name": "Mohammed Saqib Khan",
+        "class": "Grade 9",
+        "phone": "9100090990",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0075",
+        "name": "Anav M Dehilkar",
+        "class": "Grade 7",
+        "phone": "9849582655",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0076",
+        "name": "S Aarav",
+        "class": "Grade 3",
+        "phone": "9676282025",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0077",
+        "name": "Olive",
+        "class": "Grade 5",
+        "phone": "9799519426",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0078",
+        "name": "Aeria Agarwal",
+        "class": "Grade 7",
+        "phone": "9676470585",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0079",
+        "name": "Aini Yadav Botalboina",
+        "class": "Grade 6",
+        "phone": "9849046216",
+        "schedule": "MWF",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          2
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0080",
+        "name": "Sana Rumalla",
+        "class": "Grade 8",
+        "phone": "9908764438",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
           3
         ],
         "timeline_lock_status": false,
-        "last_exam_date": "2026-04-15"
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0081",
+        "name": "Ganpati Nanika Chowdary",
+        "class": "Grade 7",
+        "phone": "9963156969",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0082",
+        "name": "Anika Kabra",
+        "class": "Grade 9",
+        "phone": "9990583653",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0083",
+        "name": "J Sanvika",
+        "class": "Grade 7",
+        "phone": "9949333711",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0084",
+        "name": "Zerah Zoha Mowla",
+        "class": "Grade 7",
+        "phone": "7729958628",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0085",
+        "name": "Sahasra Jilendra",
+        "class": "Grade 8",
+        "phone": "8897995600",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0086",
+        "name": "Vhaan Merani",
+        "class": "Grade 6",
+        "phone": "9908398763",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0087",
+        "name": "Atharv Chandra Varma T",
+        "class": "Grade 9",
+        "phone": "9703589784",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0088",
+        "name": "Idarth Seth",
+        "class": "Grade 9",
+        "phone": "9849807073",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0089",
+        "name": "Syed Moinudin Ali Khan",
+        "class": "Grade 7",
+        "phone": "9177711112",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0090",
+        "name": "Krithikar Lengampalli",
+        "class": "Grade 6",
+        "phone": "9542115657",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0091",
+        "name": "Theja Malakhli",
+        "class": "Grade 8",
+        "phone": "9866884812",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0092",
+        "name": "Munira Hussain",
+        "class": "Grade 9",
+        "phone": "9652515794",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0093",
+        "name": "Sathvik Chinnamasetty",
+        "class": "Grade 6",
+        "phone": "9482162013",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0094",
+        "name": "Lokith Chinnamasetty",
+        "class": "Grade 6",
+        "phone": "9482162013",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0095",
+        "name": "Amogh G",
+        "class": "Grade 7",
+        "phone": "9052343767",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0096",
+        "name": "Anagh B",
+        "class": "Grade 7",
+        "phone": "9985234576",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0097",
+        "name": "Hisham Abdul Hameed",
+        "class": "Grade 6",
+        "phone": "7093829263",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0098",
+        "name": "Arav Shiran",
+        "class": "Grade 8",
+        "phone": "9108114080",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0099",
+        "name": "Riddhima K",
+        "class": "Grade 6",
+        "phone": "9773527999",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0100",
+        "name": "Vansh Sharma",
+        "class": "Grade 5",
+        "phone": "9649659016",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0101",
+        "name": "Prathyagra",
+        "class": "Grade 6",
+        "phone": "9423162013",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0102",
+        "name": "Rishabh Kapoor",
+        "class": "Grade 6",
+        "phone": "9482162013",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0103",
+        "name": "Akshaj Anand Tsama",
+        "class": "Grade 7",
+        "phone": "9177777124",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0104",
+        "name": "V Sadhvi",
+        "class": "Grade 8",
+        "phone": "7093829263",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0105",
+        "name": "Aravhao Rao",
+        "class": "Grade 5",
+        "phone": "9985899015",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0106",
+        "name": "Tanush Kumar",
+        "class": "Grade 8",
+        "phone": "8008630872",
+        "schedule": "MWF",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0107",
+        "name": "Syed Ali Abdul Razzaq",
+        "class": "Grade 5",
+        "phone": "9966970008",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0108",
+        "name": "Anay Reddy J",
+        "class": "Grade 6",
+        "phone": "9963164183",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0109",
+        "name": "Saanvi Sri",
+        "class": "Grade 3",
+        "phone": "9492025490",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0110",
+        "name": "Ansh Kapoor",
+        "class": "Grade 5",
+        "phone": "9440033598",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0111",
+        "name": "Agasthya",
+        "class": "Grade 8",
+        "phone": "9177727205",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0112",
+        "name": "Tanishka Banita",
+        "class": "Grade 7",
+        "phone": "9885414000",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0113",
+        "name": "Venotshitha Reddy",
+        "class": "Grade 7",
+        "phone": "9849861159",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0114",
+        "name": "Nived Rao V",
+        "class": "Grade 4",
+        "phone": "8008083419",
+        "schedule": "TThS",
+        "level_category": "Advance",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0115",
+        "name": "Ananya D",
+        "class": "Grade 6",
+        "phone": "8886802704",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0116",
+        "name": "Daanya Ali",
+        "class": "Grade 5",
+        "phone": "8790994266",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0117",
+        "name": "RajVardhain Bantia",
+        "class": "Grade 5",
+        "phone": "8886802704",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0118",
+        "name": "Dhrithi Jain",
+        "class": "Grade 5",
+        "phone": "",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0119",
+        "name": "Sreevatsuru Neerumalla",
+        "class": "Grade 5",
+        "phone": "9059061095",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0120",
+        "name": "Devashna Chowdhary Veluri",
+        "class": "Grade 6",
+        "phone": "8143025965",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0121",
+        "name": "Aarush Mandal",
+        "class": "Grade 10",
+        "phone": "9479571850",
+        "schedule": "TThS",
+        "level_category": "Intermediate",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          3
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0122",
+        "name": "Karthik Balram Nuthakki",
+        "class": "Grade 9",
+        "phone": "8688140142",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0123",
+        "name": "Lipika Pallem",
+        "class": "Grade 12",
+        "phone": "9121678080",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0124",
+        "name": "Keyura",
+        "class": "Grade 11",
+        "phone": "8500035209",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0125",
+        "name": "Veda Seth",
+        "class": "Grade 8",
+        "phone": "9849807073",
+        "schedule": "MWF",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0126",
+        "name": "Yuvan Amogh",
+        "class": "Grade 7",
+        "phone": "9449823638",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0127",
+        "name": "Yashita Banta",
+        "class": "Grade 10",
+        "phone": "9885414000",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0128",
+        "name": "Venya Nuthak",
+        "class": "Grade 10",
+        "phone": "9302502679",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0129",
+        "name": "Preethi Pradhan Bali",
+        "class": "Grade 12",
+        "phone": "9618111641",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
+      }
+    },
+    {
+      "profile": {
+        "unique_id": "EQUI-0130",
+        "name": "Shahzaad",
+        "class": "Grade 4",
+        "phone": "9618111641",
+        "schedule": "TThS",
+        "level_category": "",
+        "age": 0,
+        "dob": "",
+        "school": ""
+      },
+      "background_questionnaire": {
+        "events_attended": false,
+        "medals_won": 0,
+        "objective": "",
+        "coach_rating": 0
+      },
+      "progression": {
+        "levels": [
+          4
+        ],
+        "timeline_lock_status": false,
+        "last_exam_date": ""
       }
     }
   ],
-  "exams": [
-    {
-      "id": "exam-1",
-      "studentId": "EQUI-1001",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 3,
-      "date": "2026-04-15",
-      "time": "09:00 AM",
-      "status": "Completed",
-      "totalScore": 7,
-      "scores": {
-        "Dress Code_Helmet": 0,
-        "Dress Code_Riding Boots": 0,
-        "Parts of Saddle / Tack_Girth": 4,
-        "Know Your Horse_Withers": 3
-      },
-      "createdAt": "2026-04-10T00:00:00Z"
-    },
-    {
-      "id": "exam-2",
-      "studentId": "EQUI-1002",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 1,
-      "date": "2026-04-16",
-      "time": "10:00 AM",
-      "status": "In-Progress",
-      "totalScore": 8,
-      "scores": {
-        "Dress Code_Helmet": 5,
-        "Dress Code_T-Shirt/Blazer": 0,
-        "Dress Code_Riding Boots": 0,
-        "Overall Judgement_Control": 3
-      },
-      "createdAt": "2026-04-10T00:00:00Z"
-    },
-    {
-      "id": "exam-3",
-      "studentId": "EQUI-1003",
-      "juryId": "u-jury2",
-      "juryName": "Dr. Dianne Rachel",
-      "level": 4,
-      "date": "2026-04-14",
-      "time": "11:00 AM",
-      "status": "In-Progress",
-      "totalScore": 84,
-      "scores": {
-        "Dress Code_Helmet": 0,
-        "Dress Code_Breeches": 5,
-        "Dress Code_Riding Boots": 5,
-        "Dress Code_T-Shirt/Blazer": 5,
-        "Parts of Saddle / Tack_Saddle": 4,
-        "Parts of Saddle / Tack_Bridle": 4,
-        "Parts of Saddle / Tack_Reins": 5,
-        "Parts of Saddle / Tack_Girth": 4,
-        "Parts of Saddle / Tack_Stirrup": 4,
-        "Know Your Horse_Withers": 4,
-        "Know Your Horse_Forelock": 3,
-        "Know Your Horse_Hooves": 5,
-        "Know Your Horse_Mane": 4,
-        "Know Your Horse_Fetlock": 3,
-        "Riding Knowledge_Mounting": 5,
-        "Riding Knowledge_Seating Position": 4,
-        "Riding Knowledge_Trot": 3,
-        "Riding Knowledge_Canter": 3,
-        "Riding Knowledge_Jumps": 2,
-        "Overall Judgement_Confidence": 4,
-        "Overall Judgement_Attitude": 4,
-        "Overall Judgement_Control": 4
-      },
-      "createdAt": "2026-04-05T00:00:00Z"
-    },
-    {
-      "id": "exam-1776194388989",
-      "studentId": "EQUI-1003",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 2,
-      "date": "2026-04-15",
-      "time": "09:00 AM",
-      "status": "Completed",
-      "totalScore": 0,
-      "scores": {},
-      "createdAt": "2026-04-14T19:19:48.989Z"
-    },
-    {
-      "id": "exam-1776194389016",
-      "studentId": "EQUI-1003",
-      "juryId": "u-jury1",
-      "juryName": "Jury 2",
-      "level": 3,
-      "date": "2026-04-15",
-      "time": "09:00 AM",
-      "status": "Scheduled",
-      "totalScore": null,
-      "scores": null,
-      "createdAt": "2026-04-14T19:19:49.016Z"
-    },
-    {
-      "id": "exam-1776252454647",
-      "studentId": "EQUI-1001",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 1,
-      "date": "2026-08-01",
-      "time": "09:00 AM",
-      "status": "Completed",
-      "totalScore": 0,
-      "scores": {},
-      "createdAt": "2026-04-15T11:27:34.647Z"
-    },
-    {
-      "id": "exam-1776253750926",
-      "studentId": "EQUI-1001",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 1,
-      "date": "2026-05-01",
-      "time": "09:00 AM",
-      "status": "Completed",
-      "totalScore": 0,
-      "scores": {},
-      "createdAt": "2026-04-15T11:49:10.926Z"
-    },
-    {
-      "id": "exam-1776253750951",
-      "studentId": "EQUI-1001",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 2,
-      "date": "2026-05-01",
-      "time": "09:00 AM",
-      "status": "Completed",
-      "totalScore": 0,
-      "scores": {},
-      "createdAt": "2026-04-15T11:49:10.951Z"
-    },
-    {
-      "id": "exam-1776253750973",
-      "studentId": "EQUI-1001",
-      "juryId": "u-jury2",
-      "juryName": "Jury 1",
-      "level": 3,
-      "date": "2026-05-01",
-      "time": "09:00 AM",
-      "status": "Completed",
-      "totalScore": 7,
-      "scores": {
-        "Dress Code_Helmet": 0,
-        "Dress Code_Riding Boots": 0,
-        "Parts of Saddle / Tack_Girth": 4,
-        "Know Your Horse_Withers": 3
-      },
-      "createdAt": "2026-04-15T11:49:10.973Z"
-    }
-  ],
+  "exams": [],
   "scoringTemplates": {
     "1": {
       "levelName": "Level 1 — Beginner",
@@ -497,13 +3634,19 @@
               "name": "Equestrian Events Attended",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Medals Won",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Points to Coach by Student",
@@ -778,13 +3921,19 @@
               "name": "Equestrian Events Attended",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Medals Won",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Points to Coach by Student",
@@ -1123,13 +4272,19 @@
               "name": "Equestrian Events Attended",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Medals Won",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Points to Coach by Student",
@@ -1468,13 +4623,19 @@
               "name": "Equestrian Events Attended",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Medals Won",
               "max_score": 0,
               "type": "select",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "name": "Points to Coach by Student",

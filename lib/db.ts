@@ -22,7 +22,7 @@ export interface DBStudent {
   };
   background_questionnaire: {
     events_attended: boolean;
-    medals_won: number;
+    medals_won: boolean;
     objective: string;
     coach_rating: number;
   };

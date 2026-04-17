@@ -11,10 +11,16 @@ export interface Student {
     school: string;
     class: string;
     unique_id: string;
+    level_category?: string;
+    gender?: string;
+    phone?: string;
+    parent_name?: string;
+    emergency_contact?: string;
+    blood_group?: string;
   };
   background_questionnaire: {
     events_attended: boolean;
-    medals_won: number;
+    medals_won: boolean;
     objective: 'Just Fun' | 'Lifestyle Sport' | 'Passion' | 'Nationals' | 'International';
     coach_rating: number;
   };

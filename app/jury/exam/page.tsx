@@ -103,10 +103,11 @@ function ExamScoringContent() {
         display: 'flex', alignItems: 'center', gap: '14px',
       }}>
         <div style={{
-          width: '56px', height: '56px', borderRadius: '14px',
-          background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
+          width: '64px', height: '64px', borderRadius: '18px',
+          background: 'linear-gradient(135deg,#7c3aed,#4f46e5)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: 'white', fontWeight: 800, fontSize: '22px', flexShrink: 0,
+          color: 'white', fontWeight: 900, fontSize: '24px', flexShrink: 0,
+          boxShadow: '0 4px 12px rgba(124,58,237,0.2)'
         }}>
           {student.profile.name.charAt(0)}
         </div>
@@ -118,10 +119,11 @@ function ExamScoringContent() {
           <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
             {Array.from(new Set(student.progression.levels || [])).map(l => (
               <span key={l} style={{
-                fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px',
-                background: l === exam.level ? '#FFD600' : '#f3f4f6',
-                color: l === exam.level ? '#1E3A8A' : '#6b7280',
-                border: l === exam.level ? '2px solid #FFD600' : '1px solid #e5e7eb',
+                fontSize: '11px', fontWeight: 800, padding: '3px 10px', borderRadius: '6px',
+                background: l === exam.level ? '#7c3aed' : '#f1f5f9',
+                color: l === exam.level ? 'white' : 'var(--text-muted)',
+                border: l === exam.level ? '2px solid transparent' : '1px solid var(--border-color)',
+                boxShadow: l === exam.level ? '0 4px 10px rgba(124,58,237,0.3)' : 'none'
               }}>
                 Level {l}
               </span>
@@ -182,9 +184,10 @@ function ExamScoringContent() {
           disabled={isSaving || exam.status === 'Completed'}
           style={{
             width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px',
-            background: exam.status === 'Completed' ? '#6b7280' : '#10b981',
-            padding: '20px', borderRadius: '16px', fontSize: '16px', fontWeight: 700,
-            boxShadow: exam.status !== 'Completed' ? '0 20px 25px -5px rgba(16,185,129,0.2)' : 'none',
+            background: exam.status === 'Completed' ? '#a1a1aa' : '#10b981',
+            padding: '24px', borderRadius: '20px', fontSize: '18px', fontWeight: 900,
+            boxShadow: exam.status !== 'Completed' ? '0 20px 25px -5px rgba(16,185,129,0.3)' : 'none',
+            border: 'none', color: 'white'
           }}
         >
           {isSaving ? (
@@ -192,7 +195,7 @@ function ExamScoringContent() {
           ) : (
             <Save size={24} />
           )}
-          {exam.status === 'Completed' ? 'Already Scored' : isSaving ? 'Submitting...' : `Submit Level ${exam.level} Scores`}
+          {exam.status === 'Completed' ? 'Evaluation Already Submitted' : isSaving ? 'Syncing Scores...' : `Lock & Submit Level ${exam.level}`}
         </button>
       </div>
     </div>

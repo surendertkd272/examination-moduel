@@ -187,17 +187,23 @@ export default function TemplatesPage() {
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 24px', cursor: 'pointer', borderBottom: isExpanded ? '1px solid var(--border-color)' : 'none' }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3b82f6', fontWeight: 800, fontSize: '16px' }}>
+                  <div style={{ 
+                    width: '44px', height: '44px', borderRadius: '12px', 
+                    background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', 
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                    color: 'white', fontWeight: 900, fontSize: '18px',
+                    boxShadow: '0 4px 12px rgba(124,58,237,0.2)'
+                  }}>
                     {level}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '15px' }}>{t.levelName}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                    <div style={{ fontWeight: 900, fontSize: '16px', color: 'var(--text-main)', letterSpacing: '-0.01em' }}>{t.levelName}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px' }}>
                       {t.categories.length} categories • Max {maxPossible} pts • Pass: {t.passThreshold}%
                     </div>
                   </div>
                 </div>
-                {isExpanded ? <ChevronUp size={20} color="#6b7280" /> : <ChevronDown size={20} color="#6b7280" />}
+                {isExpanded ? <ChevronUp size={20} color="var(--primary-color)" strokeWidth={3} /> : <ChevronDown size={20} color="#64748b" strokeWidth={2} />}
               </div>
 
               {/* Expanded content */}

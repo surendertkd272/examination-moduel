@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
     const students = await getStudents();
 
-    const headers = ['Unique ID', 'Name', 'Age', 'DOB', 'School', 'Class', 'Objective', 'Medals Won', 'Coach Rating', 'Levels', 'Last Exam Date'];
+    const headers = ['Unique ID', 'Name', 'Age', 'DOB', 'School', 'Class', 'Objective', 'Events Attended', 'Medals Won', 'Coach Rating', 'Levels', 'Last Exam Date'];
     const rows = students.map(s => [
       s.profile.unique_id,
       s.profile.name,
@@ -23,7 +23,8 @@ export async function GET(request: NextRequest) {
       s.profile.school,
       s.profile.class,
       s.background_questionnaire.objective,
-      s.background_questionnaire.medals_won,
+      s.background_questionnaire.events_attended ? 'Yes' : 'No',
+      s.background_questionnaire.medals_won ? 'Yes' : 'No',
       s.background_questionnaire.coach_rating,
       (s.progression.levels || []).join(';'),
       s.progression.last_exam_date,

@@ -10,23 +10,24 @@ import {
 const OBJECTIVES = ['Just Fun', 'Lifestyle Sport', 'Passion', 'Nationals', 'International'] as const;
 
 const STUDENT_FIELDS = [
-  { key: 'name',            label: 'Full Name',                    required: true  },
-  { key: 'unique_id',       label: 'Unique ID',                    required: false },
-  { key: 'age',             label: 'Age',                          required: false },
-  { key: 'dob',             label: 'Date of Birth (YYYY-MM-DD)',   required: false },
-  { key: 'school',          label: 'School',                       required: false },
-  { key: 'class',           label: 'Class / Grade',                required: false },
-  { key: 'objective',       label: 'Objective',                    required: false },
-  { key: 'medals_won',      label: 'Medals Won',                   required: false },
-  { key: 'coach_rating',    label: 'Coach Rating (1–10)',          required: false },
-  { key: 'events_attended', label: 'Events Attended (true/false)', required: false },
-  { key: 'levels',          label: 'Levels (e.g. 1 or 1;2)',       required: false },
-  { key: 'last_exam_date',  label: 'Last Exam Date',               required: false },
+  { key: 'name',               label: 'Full Name',                    required: true,  placeholder: 'e.g. Rahul Sharma' },
+  { key: 'gender',             label: 'Gender',                       required: false, placeholder: 'Select Gender' },
+  { key: 'dob',                label: 'Date of Birth',                required: false, placeholder: 'YYYY-MM-DD' },
+  { key: 'phone',              label: 'Student Mobile',               required: false, placeholder: 'e.g. 98765-43210' },
+  { key: 'unique_id',          label: 'Registration ID (EQUI-XXXX)',  required: false, placeholder: 'Leave blank to auto-generate' },
+  { key: 'school',             label: 'School / Academy',             required: true,  placeholder: 'e.g. Riverside Academy' },
+  { key: 'level_category',     label: 'Skill Category',               required: false, placeholder: 'e.g. Intermediate' },
+  { key: 'parent_name',        label: 'Parent/Guardian Name',         required: false, placeholder: 'e.g. Amit Sharma' },
+  { key: 'emergency_contact',  label: 'Emergency Number',             required: false, placeholder: 'e.g. 91111-22222' },
+  { key: 'blood_group',        label: 'Blood Group',                  required: false, placeholder: 'e.g. B+' },
 ] as const;
 
 const emptyStudent = (): Omit<Student, 'progression'> & { progression: Student['progression'] } => ({
-  profile: { name: '', age: 0, dob: '', school: '', class: '', unique_id: '' },
-  background_questionnaire: { events_attended: false, medals_won: 0, objective: 'Passion', coach_rating: 5 },
+  profile: { 
+    name: '', age: 0, dob: '', school: 'The Hyderabad Public School', class: '', unique_id: '', level_category: '',
+    gender: 'Male', phone: '', parent_name: '', emergency_contact: '', blood_group: ''
+  },
+  background_questionnaire: { events_attended: false, medals_won: false, objective: 'Passion', coach_rating: 5 },
   progression: { levels: [1], timeline_lock_status: false, last_exam_date: '' },
 });
 
@@ -100,7 +101,15 @@ export default function SuperadminStudentsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    const ok = editingId ? await updateStudent(editingId, form) : await addStudent(form);
+    // Ensure levels are deduplicated
+    const cleanForm = {
+      ...form,
+      progression: {
+        ...form.progression,
+        levels: Array.from(new Set(form.progression.levels)).sort((a,b) => a - b)
+      }
+    };
+    const ok = editingId ? await updateStudent(editingId, cleanForm) : await addStudent(cleanForm);
     setSaving(false);
     if (ok) {
       setSavedMsg(editingId ? 'Student updated!' : 'Student added!');
@@ -192,18 +201,29 @@ export default function SuperadminStudentsPage() {
         : [parseInt(levelStr) || 1];
 
       const uniqueLevels = Array.from(new Set(levels)).sort((a,b) => a-b);
+      const parseYesNo = (val: string) => {
+        const v = val.toLowerCase().trim();
+        return v === 'yes' || v === 'y' || v === 'true' || v === '1';
+      };
+
       out.push({
         profile: {
-          name,
-          age:       parseInt(get('age')) || 12,
-          dob:       get('dob') || '',
-          school:    get('school') || '',
-          class:     get('class') || '',
-          unique_id: get('unique_id') || '',
+          name:            name,
+          age:             parseInt(get('age')) || 12,
+          dob:             get('dob') || '',
+          school:          get('school') || '',
+          class:           get('class') || '',
+          unique_id:       get('unique_id') || '',
+          level_category:  get('level_category') || '',
+          gender:          get('gender') || 'Male',
+          phone:           get('phone') || '',
+          parent_name:     get('parent_name') || '',
+          emergency_contact: get('emergency_contact') || '',
+          blood_group:     get('blood_group') || '',
         },
         background_questionnaire: {
-          events_attended: get('events_attended').toLowerCase() === 'true',
-          medals_won:      parseInt(get('medals_won')) || 0,
+          events_attended: parseYesNo(get('events_attended')),
+          medals_won:      parseYesNo(get('medals_won')),
           objective:       (get('objective') as any) || 'Just Fun',
           coach_rating:    parseInt(get('coach_rating')) || 5,
         },
@@ -311,8 +331,11 @@ export default function SuperadminStudentsPage() {
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontWeight: 700, fontSize: '15px', color: 'var(--text-main)' }}>{s.profile.name}</div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
-                      {s.profile.unique_id} • {s.profile.school} • {s.profile.class}
+                    <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span>{s.profile.unique_id}</span> • <span>{s.profile.school}</span> • <span>{s.profile.class}</span>
+                      {s.profile.level_category && (
+                        <> • <span style={{ color: 'var(--primary-color)', fontWeight: 700 }}>{s.profile.level_category}</span></>
+                      )}
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
@@ -340,6 +363,7 @@ export default function SuperadminStudentsPage() {
                       <div style={{ fontSize: '11px', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '8px' }}>Profile</div>
                       <div style={{ fontSize: '13px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                         <span>DOB: <strong>{s.profile.dob || '—'}</strong></span>
+                        <span>Level Cat: <strong style={{color: 'var(--primary-color)'}}>{s.profile.level_category || 'None'}</strong></span>
                         <span>School: <strong>{s.profile.school}</strong></span>
                         <span>Class: <strong>{s.profile.class}</strong></span>
                       </div>
@@ -348,7 +372,7 @@ export default function SuperadminStudentsPage() {
                       <div style={{ fontSize: '11px', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '8px' }}>Background</div>
                       <div style={{ fontSize: '13px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                         <span>Objective: <strong>{s.background_questionnaire.objective}</strong></span>
-                        <span>Medals: <strong>{s.background_questionnaire.medals_won}</strong></span>
+                        <span>Medals: <strong>{s.background_questionnaire.medals_won ? 'Yes' : 'No'}</strong></span>
                         <span>Coach Rating: <strong>{s.background_questionnaire.coach_rating}/10</strong></span>
                       </div>
                     </div>
@@ -382,87 +406,159 @@ export default function SuperadminStudentsPage() {
             </div>
 
             <form onSubmit={handleSubmit}>
-              <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: '28px' }}>
+              <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
 
+                {/* Section 1: Personal Details */}
                 <section>
-                  <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.5px', marginBottom: '16px' }}>Profile Information</div>
-                  <div className="grid-cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--primary-color)', letterSpacing: '1px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '20px', height: '1px', background: 'var(--primary-color)' }}></div>
+                    Personal Identification
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Full Name *</label>
-                      <input type="text" value={form.profile.name} onChange={e => setProfileField('name', e.target.value)} placeholder="e.g. Sophia Chen" required />
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Full Name *</label>
+                      <input type="text" value={form.profile.name} onChange={e => setProfileField('name', e.target.value)} placeholder="e.g. Sophia Chen" required style={{ padding: '12px 14px' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Unique ID</label>
-                      <input type="text" value={form.profile.unique_id} onChange={e => setProfileField('unique_id', e.target.value)} placeholder="EQUI-XXXX (auto if blank)" />
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Gender</label>
+                      <select value={form.profile.gender} onChange={e => setProfileField('gender', e.target.value)} style={{ padding: '12px 14px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'white' }}>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Date of Birth</label>
-                      <input type="date" value={form.profile.dob} onChange={e => setProfileField('dob', e.target.value)} />
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Date of Birth</label>
+                      <input type="date" value={form.profile.dob} onChange={e => setProfileField('dob', e.target.value)} style={{ padding: '11px 14px' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Age</label>
-                      <input type="number" min={3} max={99} value={form.profile.age || ''} onChange={e => setProfileField('age', parseInt(e.target.value))} placeholder="e.g. 14" />
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Student Mobile</label>
+                      <input type="text" value={form.profile.phone} onChange={e => setProfileField('phone', e.target.value)} placeholder="e.g. 98765-43210" style={{ padding: '12px 14px' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>School *</label>
-                      <input type="text" value={form.profile.school} onChange={e => setProfileField('school', e.target.value)} placeholder="e.g. Oakwood High" required />
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Class / Grade</label>
-                      <input type="text" value={form.profile.class} onChange={e => setProfileField('class', e.target.value)} placeholder="e.g. Grade 9" />
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Blood Group</label>
+                      <input type="text" value={form.profile.blood_group} onChange={e => setProfileField('blood_group', e.target.value)} placeholder="e.g. AB+" style={{ padding: '12px 14px' }} />
                     </div>
                   </div>
                 </section>
 
+                {/* Section 2: Educational Context */}
                 <section>
-                  <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.5px', marginBottom: '16px' }}>Background Questionnaire</div>
-                  <div className="grid-cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--primary-color)', letterSpacing: '1px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '20px', height: '1px', background: 'var(--primary-color)' }}></div>
+                    Institutional Details
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Objective</label>
-                      <select value={form.background_questionnaire.objective} onChange={e => setBqField('objective', e.target.value)} style={{ minHeight: '44px', padding: '0 14px', fontSize: '14px', border: '1px solid var(--border-color)', borderRadius: '8px', background: 'white' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Registration ID (Unique ID)</label>
+                      <input type="text" value={form.profile.unique_id} onChange={e => setProfileField('unique_id', e.target.value)} placeholder="EQUI-XXXX (auto if blank)" style={{ padding: '12px 14px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>School / Academy *</label>
+                      <input type="text" value={form.profile.school} onChange={e => setProfileField('school', e.target.value)} placeholder="e.g. Oakwood High" required style={{ padding: '12px 14px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Class / Grade</label>
+                      <input type="text" value={form.profile.class} onChange={e => setProfileField('class', e.target.value)} placeholder="e.g. Grade 9" style={{ padding: '12px 14px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Skill Category</label>
+                      <select value={form.profile.level_category} onChange={e => setProfileField('level_category', e.target.value)} style={{ padding: '12px 14px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'white' }}>
+                        <option value="">Standard</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advance">Advance</option>
+                      </select>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Section 3: Guardian & Safety */}
+                <section>
+                  <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--primary-color)', letterSpacing: '1px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '20px', height: '1px', background: 'var(--primary-color)' }}></div>
+                    Guardian & Emergency
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Parent / Guardian Name</label>
+                      <input type="text" value={form.profile.parent_name} onChange={e => setProfileField('parent_name', e.target.value)} placeholder="e.g. Michael Chen" style={{ padding: '12px 14px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Emergency Contact Number</label>
+                      <input type="text" value={form.profile.emergency_contact} onChange={e => setProfileField('emergency_contact', e.target.value)} placeholder="e.g. 91122-33445" style={{ padding: '12px 14px' }} />
+                    </div>
+                  </div>
+                </section>
+
+                {/* Section 4: Experience Backdrop */}
+                <section>
+                  <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--primary-color)', letterSpacing: '1px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '20px', height: '1px', background: 'var(--primary-color)' }}></div>
+                    Rider Experience Profile
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Primary Objective</label>
+                      <select value={form.background_questionnaire.objective} onChange={e => setBqField('objective', e.target.value)} style={{ padding: '12px 14px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'white' }}>
                         {OBJECTIVES.map(o => <option key={o} value={o}>{o}</option>)}
                       </select>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Medals Won</label>
-                      <input type="number" min={0} value={form.background_questionnaire.medals_won} onChange={e => setBqField('medals_won', parseInt(e.target.value) || 0)} />
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Coach Assessment (1–10)</label>
+                      <input type="number" min={1} max={10} value={form.background_questionnaire.coach_rating} onChange={e => setBqField('coach_rating', parseInt(e.target.value) || 5)} style={{ padding: '12px 14px' }} />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Coach Rating (1–10)</label>
-                      <input type="number" min={1} max={10} value={form.background_questionnaire.coach_rating} onChange={e => setBqField('coach_rating', parseInt(e.target.value) || 5)} />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Won Medals Before?</label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {['Yes', 'No'].map(choice => (
+                          <button key={choice} type="button" onClick={() => setBqField('medals_won', choice === 'Yes')}
+                            style={{ flex: 1, padding: '12px', borderRadius: '10px', fontSize: '13px', fontWeight: 800, 
+                              background: form.background_questionnaire.medals_won === (choice === 'Yes') ? 'var(--primary-color)' : 'white', 
+                              color: form.background_questionnaire.medals_won === (choice === 'Yes') ? 'white' : '#64748b', 
+                              border: '1px solid ' + (form.background_questionnaire.medals_won === (choice === 'Yes') ? 'var(--primary-color)' : 'var(--border-color)'),
+                            }}>
+                            {choice}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingTop: '20px' }}>
-                      <input type="checkbox" id="events_attended" checked={form.background_questionnaire.events_attended} onChange={e => setBqField('events_attended', e.target.checked)} style={{ width: '18px', height: '18px', cursor: 'pointer', minHeight: 'auto' }} />
-                      <label htmlFor="events_attended" style={{ fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>Has attended events before</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Attended Events?</label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {['Yes', 'No'].map(choice => (
+                          <button key={choice} type="button" onClick={() => setBqField('events_attended', choice === 'Yes')}
+                            style={{ flex: 1, padding: '12px', borderRadius: '10px', fontSize: '13px', fontWeight: 800, 
+                              background: form.background_questionnaire.events_attended === (choice === 'Yes') ? 'var(--primary-color)' : 'white', 
+                              color: form.background_questionnaire.events_attended === (choice === 'Yes') ? 'white' : '#64748b', 
+                              border: '1px solid ' + (form.background_questionnaire.events_attended === (choice === 'Yes') ? 'var(--primary-color)' : 'var(--border-color)'),
+                             }}>
+                            {choice}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </section>
 
+                {/* Section 5: Progression Init */}
                 <section>
-                  <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.5px', marginBottom: '16px' }}>Progression</div>
+                  <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--primary-color)', letterSpacing: '1px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '20px', height: '1px', background: 'var(--primary-color)' }}></div>
+                    Exam Eligibility
+                  </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <label style={{ fontSize: '13px', fontWeight: 600 }}>Assigned Levels (select all that apply)</label>
-                      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#475569' }}>Current Level Target</label>
+                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                         {[1, 2, 3, 4].map(l => {
                           const isActive = (form.progression.levels || []).includes(l);
                           return (
                             <button key={l} type="button" onClick={() => toggleLevel(l)}
-                              style={{ padding: '10px 18px', borderRadius: '10px', fontWeight: 700, fontSize: '13px', minHeight: 'auto', background: isActive ? 'var(--primary-color)' : '#f3f4f6', color: isActive ? 'white' : '#6b7280', border: isActive ? '2px solid var(--primary-color)' : '2px solid #e5e7eb' }}>
+                              style={{ padding: '8px 16px', borderRadius: '8px', fontWeight: 800, fontSize: '12px', background: isActive ? 'var(--primary-color)' : 'white', color: isActive ? 'white' : '#64748b', border: '1px solid ' + (isActive ? 'var(--primary-color)' : 'var(--border-color)') }}>
                               Level {l}
                             </button>
                           );
                         })}
-                      </div>
-                    </div>
-                    <div className="grid-cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <label style={{ fontSize: '13px', fontWeight: 600 }}>Last Exam Date</label>
-                        <input type="date" value={form.progression.last_exam_date} onChange={e => setProgField('last_exam_date', e.target.value)} />
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingTop: '20px' }}>
-                        <input type="checkbox" id="timeline_lock" checked={form.progression.timeline_lock_status} onChange={e => setProgField('timeline_lock_status', e.target.checked)} style={{ width: '18px', height: '18px', cursor: 'pointer', minHeight: 'auto' }} />
-                        <label htmlFor="timeline_lock" style={{ fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>Timeline locked</label>
                       </div>
                     </div>
                   </div>
