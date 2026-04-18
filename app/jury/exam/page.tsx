@@ -4,17 +4,20 @@ import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useData } from '@/context/DataContext';
 import ScoringEngine from '@/components/scoring/ScoringEngine';
-import { ChevronLeft, Save, AlertCircle, ChevronDown } from 'lucide-react';
+import { ChevronLeft, Save, AlertCircle, ChevronDown, FileEdit, Check, RotateCcw } from 'lucide-react';
 
 function ExamScoringContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const examId = searchParams.get('id');
-  const { exams, students, scoringTemplates, submitScore } = useData();
+  const { exams, students, scoringTemplates, submitScore, saveDraftScore, resetDraftScore } = useData();
 
   const [totalScore, setTotalScore] = useState(0);
   const [tempScores, setTempScores] = useState<Record<string, number | string>>({});
   const [isSaving, setIsSaving] = useState(false);
+  const [isDrafting, setIsDrafting] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
+  const [draftMsg, setDraftMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const exam = exams.find(ex => ex.id === examId);
   const student = students.find(s => s.profile.unique_id === exam?.studentId);
@@ -72,6 +75,32 @@ function ExamScoringContent() {
     setIsSaving(false);
     if (result.success) {
       router.push('/jury');
+    }
+  };
+
+  const handleResetDraft = async () => {
+    if (!confirm('Reset this draft? All saved scores will be cleared and the exam will go back to Scheduled.')) return;
+    setIsResetting(true);
+    setDraftMsg(null);
+    const result = await resetDraftScore(exam.id);
+    setIsResetting(false);
+    if (result.success) {
+      router.push('/jury');
+    } else {
+      setDraftMsg({ type: 'error', text: result.error || 'Failed to reset draft' });
+    }
+  };
+
+  const handleSaveDraft = async () => {
+    setIsDrafting(true);
+    setDraftMsg(null);
+    const result = await saveDraftScore(exam.id, tempScores);
+    setIsDrafting(false);
+    if (result.success) {
+      setDraftMsg({ type: 'success', text: 'Draft saved. You can come back and finish scoring anytime.' });
+      setTimeout(() => setDraftMsg(null), 3500);
+    } else {
+      setDraftMsg({ type: 'error', text: result.error || 'Failed to save draft' });
     }
   };
 
@@ -163,6 +192,7 @@ function ExamScoringContent() {
         <p style={{ fontSize: '13px', color: '#854d0e', lineHeight: 1.5 }}>
           Evaluating <strong>{scoringTemplates[String(exam.level)]?.levelName || `Level ${exam.level}`}</strong>.
           {rubricConfig.length} scoring categories loaded.
+          {exam.status === 'In-Progress' && <strong> (Draft loaded — continue where you left off, or submit to finalize.)</strong>}
           {exam.status === 'Completed' && <strong> (Already scored: {exam.totalScore}pts. Contact superadmin to edit.)</strong>}
         </p>
       </div>
@@ -177,11 +207,67 @@ function ExamScoringContent() {
         }}
       />
 
-      {/* Submit button */}
-      <div style={{ marginTop: '24px', marginBottom: '48px' }}>
+      {/* Draft save status */}
+      {draftMsg && (
+        <div style={{
+          padding: '12px 16px', borderRadius: '12px', fontSize: '13px', fontWeight: 600,
+          background: draftMsg.type === 'success' ? '#ecfdf5' : '#fef2f2',
+          color: draftMsg.type === 'success' ? '#047857' : '#dc2626',
+          border: `1px solid ${draftMsg.type === 'success' ? '#a7f3d0' : '#fecaca'}`,
+          display: 'flex', alignItems: 'center', gap: '8px',
+        }}>
+          {draftMsg.type === 'success' ? <Check size={16} /> : <AlertCircle size={16} />}
+          {draftMsg.text}
+        </div>
+      )}
+
+      {/* Action buttons */}
+      <div style={{ marginTop: '24px', marginBottom: '48px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        {/* Reset Draft — only when a draft exists */}
+        {exam.status === 'In-Progress' && (
+          <button
+            onClick={handleResetDraft}
+            disabled={isResetting || isDrafting || isSaving}
+            style={{
+              width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px',
+              background: '#fef2f2', color: '#b91c1c',
+              padding: '14px', borderRadius: '14px', fontSize: '14px', fontWeight: 700,
+              border: '2px solid #fecaca',
+            }}
+          >
+            {isResetting ? (
+              <div style={{ width: '16px', height: '16px', border: '3px solid #b91c1c', borderTopColor: 'transparent', borderRadius: '50%' }} className="animate-spin" />
+            ) : (
+              <RotateCcw size={16} />
+            )}
+            {isResetting ? 'Resetting...' : 'Reset Draft (clear scores, back to Scheduled)'}
+          </button>
+        )}
+
+        {/* Save Draft — secondary */}
+        <button
+          onClick={handleSaveDraft}
+          disabled={isDrafting || isSaving || isResetting || exam.status === 'Completed'}
+          style={{
+            width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px',
+            background: exam.status === 'Completed' ? '#f1f5f9' : '#eef2ff',
+            color: exam.status === 'Completed' ? '#94a3b8' : '#4338ca',
+            padding: '16px', borderRadius: '16px', fontSize: '15px', fontWeight: 700,
+            border: '2px solid ' + (exam.status === 'Completed' ? '#e2e8f0' : '#c7d2fe'),
+          }}
+        >
+          {isDrafting ? (
+            <div style={{ width: '18px', height: '18px', border: '3px solid #4338ca', borderTopColor: 'transparent', borderRadius: '50%' }} className="animate-spin" />
+          ) : (
+            <FileEdit size={18} />
+          )}
+          {isDrafting ? 'Saving Draft...' : 'Save as Draft (edit later)'}
+        </button>
+
+        {/* Lock & Submit — primary */}
         <button
           onClick={handleSave}
-          disabled={isSaving || exam.status === 'Completed'}
+          disabled={isSaving || isDrafting || isResetting || exam.status === 'Completed'}
           style={{
             width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px',
             background: exam.status === 'Completed' ? '#a1a1aa' : '#10b981',

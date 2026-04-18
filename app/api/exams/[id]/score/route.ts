@@ -14,9 +14,11 @@ export async function POST(
     if (!payload) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const { id } = await params;
-    const { scores } = await request.json();
+    const { scores, draft, reset } = await request.json();
+    const isDraft = Boolean(draft);
+    const isReset = Boolean(reset);
 
-    if (!scores || typeof scores !== 'object') {
+    if (!isReset && (!scores || typeof scores !== 'object')) {
       return NextResponse.json({ error: 'Scores data is required' }, { status: 400 });
     }
 
@@ -35,35 +37,61 @@ export async function POST(
       return NextResponse.json({ error: 'You are not assigned to this exam' }, { status: 403 });
     }
 
-    // Calculate total score — exclude "Miscellaneous Questions" from total
-    let totalScore = 0;
-    const numericScores: Record<string, number> = {};
-    for (const [key, val] of Object.entries(scores)) {
-      const numVal = typeof val === 'boolean'
-        ? (val ? 5 : 0)
-        : (typeof val === 'number' ? val : parseFloat(val as string) || 0);
-      numericScores[key] = numVal;
+    // Reset path: clear any draft scores and put the exam back on the schedule.
+    if (isReset) {
+      const resetExam = await updateExam(id, {
+        scores: {},
+        totalScore: 0,
+        status: 'Scheduled',
+      });
+      return NextResponse.json({ success: true, exam: resetExam, totalScore: 0, reset: true });
+    }
 
-      if (!key.startsWith('Miscellaneous Questions_')) {
-        totalScore += numVal;
+    // Preserve the original value type so `select` answers (e.g. "Yes"/"No")
+    // and free-text remarks survive — previously we parseFloat'd everything,
+    // which wiped non-numeric fields like Objective and Remarks by Jury.
+    // Only numbers and booleans contribute to totalScore.
+    let totalScore = 0;
+    const savedScores: Record<string, number | string> = {};
+    for (const [key, val] of Object.entries(scores)) {
+      if (typeof val === 'boolean') {
+        const n = val ? 5 : 0;
+        savedScores[key] = n;
+        if (!key.startsWith('Miscellaneous Questions_')) totalScore += n;
+      } else if (typeof val === 'number') {
+        savedScores[key] = val;
+        if (!key.startsWith('Miscellaneous Questions_')) totalScore += val;
+      } else if (typeof val === 'string') {
+        // Keep strings as strings. Only treat as numeric if it parses cleanly
+        // AND the original looked like a number (all digits / decimal).
+        const trimmed = val.trim();
+        if (trimmed !== '' && /^-?\d+(\.\d+)?$/.test(trimmed)) {
+          const n = parseFloat(trimmed);
+          savedScores[key] = n;
+          if (!key.startsWith('Miscellaneous Questions_')) totalScore += n;
+        } else {
+          savedScores[key] = val;
+        }
       }
     }
 
     const updatedExam = await updateExam(id, {
-      scores: numericScores,
+      scores: savedScores,
       totalScore,
-      status: 'Completed',
+      status: isDraft ? 'In-Progress' : 'Completed',
     });
 
-    // Update student's progression last_exam_date
-    const student = await getStudentById(exam.studentId);
-    if (student) {
-      await updateStudent(exam.studentId, {
-        progression: {
-          ...student.progression,
-          last_exam_date: new Date().toISOString().split('T')[0],
-        },
-      });
+    // Only stamp last_exam_date on a final submission, not on a draft save.
+    if (!isDraft) {
+      const student = await getStudentById(exam.studentId);
+      if (student) {
+        await updateStudent(exam.studentId, {
+          progression: {
+            ...student.progression,
+            last_exam_date: new Date().toISOString().split('T')[0],
+          },
+        });
+      }
     }
 
     return NextResponse.json({ success: true, exam: updatedExam, totalScore });

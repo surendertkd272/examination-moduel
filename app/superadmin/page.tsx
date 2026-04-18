@@ -400,6 +400,11 @@ export default function SuperAdminPage() {
                           {exam.totalScore}pts
                         </span>
                       )}
+                      {exam.status === 'In-Progress' && (
+                        <span style={{ fontSize: '11px', fontWeight: 700, color: isSelected ? 'white' : '#a16207' }}>
+                          Draft · {exam.totalScore || 0}pts
+                        </span>
+                      )}
                     </div>
                   </div>
                 );
@@ -436,11 +441,11 @@ export default function SuperAdminPage() {
                 <span style={{
                   display: 'inline-flex', alignItems: 'center', gap: '6px',
                   padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: 700,
-                  background: exam.status === 'Completed' ? '#dcfce7' : '#fef9c3',
+                  background: exam.status === 'Completed' ? '#dcfce7' : exam.status === 'In-Progress' ? '#fef3c7' : '#fef9c3',
                   color: exam.status === 'Completed' ? '#16a34a' : '#a16207',
                 }}>
                   {exam.status === 'Completed' ? <Check size={12} /> : null}
-                  {exam.status}
+                  {exam.status === 'In-Progress' ? `Draft · ${exam.totalScore || 0}pts` : exam.status}
                 </span>
               </div>
 
@@ -625,8 +630,8 @@ export default function SuperAdminPage() {
               })()}
 
 
-              {/* Score breakdown — with edit capability */}
-              {exam.status === 'Completed' && (
+              {/* Score breakdown — with edit capability (Completed finals + In-Progress drafts) */}
+              {(exam.status === 'Completed' || exam.status === 'In-Progress') && (
                 <div style={{ marginTop: '20px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                     <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#9ca3af', letterSpacing: '0.5px' }}>Score Breakdown</div>

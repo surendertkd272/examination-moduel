@@ -98,6 +98,8 @@ interface DataContextType {
   updateExam: (examId: string, updates: Partial<Exam>) => Promise<boolean>;
   deleteExam: (examId: string) => Promise<boolean>;
   submitScore: (examId: string, scores: Record<string, any>) => Promise<{ success: boolean; totalScore?: number }>;
+  saveDraftScore: (examId: string, scores: Record<string, any>) => Promise<{ success: boolean; totalScore?: number; error?: string }>;
+  resetDraftScore: (examId: string) => Promise<{ success: boolean; error?: string }>;
   updateExamScores: (examId: string, scores: Record<string, any>) => Promise<{ success: boolean; totalScore?: number }>;
   addUser: (user: { name: string; username: string; role: string; password: string }) => Promise<{ success: boolean; error?: string }>;
   updateUser: (id: string, updates: { name?: string; username?: string; role?: string; password?: string; status?: string }) => Promise<{ success: boolean; error?: string }>;
@@ -307,10 +309,50 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         await refreshExams();
         return { success: true, totalScore: data.totalScore };
       }
-      const errData = await res.json().catch(() => ({}));
       return { success: false, totalScore: undefined };
     } catch { /* ignore */ }
     return { success: false };
+  };
+
+  // Save partial scores without finalizing the exam. Status moves to
+  // In-Progress so the jury can return and edit later; last_exam_date is
+  // NOT stamped on the student until the final submission.
+  const saveDraftScore = async (examId: string, scores: Record<string, any>): Promise<{ success: boolean; totalScore?: number; error?: string }> => {
+    try {
+      const res = await fetch(`/api/exams/${examId}/score`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scores, draft: true }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        await refreshExams();
+        return { success: true, totalScore: data.totalScore };
+      }
+      return { success: false, error: data.error || `Draft save failed (HTTP ${res.status})` };
+    } catch {
+      return { success: false, error: 'Network error' };
+    }
+  };
+
+  // Clear a draft: resets scores + totalScore and flips status back to
+  // Scheduled so the exam reappears on the schedule.
+  const resetDraftScore = async (examId: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch(`/api/exams/${examId}/score`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reset: true }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        await refreshExams();
+        return { success: true };
+      }
+      return { success: false, error: data.error || `Reset failed (HTTP ${res.status})` };
+    } catch {
+      return { success: false, error: 'Network error' };
+    }
   };
 
   // Superadmin-only: edit scores on a completed exam
@@ -435,7 +477,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       students, exams, users, scoringTemplates, loading,
       refreshStudents, refreshExams, refreshUsers, refreshScoringTemplates,
       addStudent, addStudentsBulk, updateStudent, deleteStudent,
-      addExam, updateExam, deleteExam, submitScore, updateExamScores,
+      addExam, updateExam, deleteExam, submitScore, saveDraftScore, resetDraftScore, updateExamScores,
       addUser, updateUser, deleteUser,
       updateScoringTemplates,
       exportStudentsCSV,

@@ -23,18 +23,16 @@ export default function ScoringEngine({
   initialScores = {},
   onScoreChange,
 }: ScoringEngineProps) {
-  const [scores, setScores] = useState<Record<string, number | string>>(initialScores);
+  // Hydrate from initialScores once on mount only. Subsequent re-renders of
+  // the parent (e.g. 20s data polls) must NOT wipe out in-progress edits —
+  // the earlier effect that copied initialScores into state on every change
+  // was overwriting drafts the jury had just typed.
+  const [scores, setScores] = useState<Record<string, number | string>>(() => initialScores);
 
   useEffect(() => {
     const total = Object.values(scores).reduce<number>((a, b) => a + (typeof b === 'number' ? b : 0), 0);
     onScoreChange(scores, total);
   }, [scores]);  // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (Object.keys(initialScores).length > 0) {
-      setScores(initialScores);
-    }
-  }, [initialScores]);
 
   const updateVal = (key: string, val: number | string) =>
     setScores(prev => ({ ...prev, [key]: val }));
